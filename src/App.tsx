@@ -483,7 +483,7 @@ export default function App() {
                   <AppleIcon /> Download on iOS
                 </a>
                 <a
-                  href="https://expo.dev/artifacts/eas/Ym5DGdRcKy5Nne9W2vLAS5ouVPyxbmrpVEHlxjDOOT0.apk"
+                  href="https://expo.dev/artifacts/eas/a88RUU_DAJcbLWIfvp4S17OEjRFBFuSUrabKmyim0q0.apk"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`${cta} bg-[#FFB60C] px-7 py-3.5 text-[15px] text-[#1A1A1A] hover:bg-[#E0A800]`}
@@ -745,7 +745,7 @@ export default function App() {
                 <AppleIcon /> Download on iOS
               </a>
               <a
-                href="https://expo.dev/artifacts/eas/Ym5DGdRcKy5Nne9W2vLAS5ouVPyxbmrpVEHlxjDOOT0.apk"
+                href="https://expo.dev/artifacts/eas/a88RUU_DAJcbLWIfvp4S17OEjRFBFuSUrabKmyim0q0.apk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${cta} bg-white px-8 py-4 text-[16px] text-[#1A1A1A]`}
