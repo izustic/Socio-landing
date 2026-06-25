@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode } from "react";
-import logoPng from "../assets/logo.png";
+import logoPng from "../assets/favicon.png";
 
 /* ---------- Icons (inline SVG) ---------- */
 const AppleIcon = ({ color = "#fff" }: { color?: string }) => (
