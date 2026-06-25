@@ -687,8 +687,8 @@ export default function App() {
               },
               {
                 I: PinIcon,
-                t: "Location-based Matching",
-                b: "Find people within your radius using OpenStreetMap. No Google Maps account needed.",
+                t: "Find people near you",
+                b: "Socio shows you people and Circles within your area. The closer they are, the easier it is to actually meet up.",
               },
               {
                 I: UsersIcon,
