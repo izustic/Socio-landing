@@ -177,8 +177,8 @@ const ShieldIcon = () => (
 /* ---------- Logo ---------- */
 const Logo = () => (
   <div className="flex items-center gap-2">
-    <img src={logoPng} alt="socio logo" width={32} height={32} />
-    <span className="text-[20px] font-extrabold tracking-tight text-[#1A1A1A]">socio</span>
+    <img src={logoPng} alt="sociol logo" width={32} height={32} />
+    <span className="text-[20px] font-extrabold tracking-tight text-[#1A1A1A]">sociol</span>
   </div>
 );
 
@@ -622,7 +622,7 @@ export default function App() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {[
               {
-                q: "We met through Socio three months ago. We've had six meetups since. I've never made friends this fast in my life.",
+                q: "We met through Sociol three months ago. We've had six meetups since. I've never made friends this fast in my life.",
                 n: "Adaeze O.",
                 t: "Lagos, Nigeria",
               },
@@ -688,7 +688,7 @@ export default function App() {
               {
                 I: PinIcon,
                 t: "Find people near you",
-                b: "Socio shows you people and Circles within your area. The closer they are, the easier it is to actually meet up.",
+                b: "Sociol shows you people and Circles within your area. The closer they are, the easier it is to actually meet up.",
               },
               {
                 I: UsersIcon,
@@ -733,7 +733,7 @@ export default function App() {
           </Reveal>
           <Reveal delay={80}>
             <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-[1.6] text-[#1A1A1A]/65">
-              Download Socio and start building the friendships that actually last.
+              Download Sociol and start building the friendships that actually last.
             </p>
           </Reveal>
           <Reveal delay={160}>
@@ -764,8 +764,8 @@ export default function App() {
       <footer className="border-t border-[#EFEFEF] bg-white">
         <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-4 px-5 py-8 md:flex-row">
           <div className="flex items-center gap-3 text-[13px] text-[#AAAAAA]">
-            <span className="font-extrabold text-[#1A1A1A]">socio</span>
-            <span>© 2026 Socio. All rights reserved.</span>
+            <span className="font-extrabold text-[#1A1A1A]">sociol</span>
+            <span>© 2026 Sociol. All rights reserved.</span>
           </div>
           <div className="flex gap-6 text-[13px] text-[#6B6B6B]">
             <a href="#" className="hover:underline">
