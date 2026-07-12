@@ -1,6 +1,10 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import logoPng from "../assets/favicon.png";
 
+/* ---------- Links ---------- */
+const ANDROID_DOWNLOAD_URL =
+  "https://expo.dev/artifacts/eas/T5d1A1LKz42I31h2CsWqRx12CaFL7TrIep9s1Agv9rk.apk";
+
 /* ---------- Icons (inline SVG) ---------- */
 const AppleIcon = ({ color = "#fff" }: { color?: string }) => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill={color} aria-hidden>
@@ -483,7 +487,7 @@ export default function App() {
                   <AppleIcon /> Download on iOS
                 </a>
                 <a
-                  href="https://expo.dev/artifacts/eas/SejyLLDxWcq049ldRGT4_rdCDuSYuFoO4bvJS7Ghavo.apk"
+                  href={ANDROID_DOWNLOAD_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`${cta} bg-[#FFB60C] px-7 py-3.5 text-[15px] text-[#1A1A1A] hover:bg-[#E0A800]`}
@@ -745,7 +749,7 @@ export default function App() {
                 <AppleIcon /> Download on iOS
               </a>
               <a
-                href="https://expo.dev/artifacts/eas/SejyLLDxWcq049ldRGT4_rdCDuSYuFoO4bvJS7Ghavo.apk"
+                href={ANDROID_DOWNLOAD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${cta} bg-white px-8 py-4 text-[16px] text-[#1A1A1A]`}
