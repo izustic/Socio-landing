@@ -3,7 +3,7 @@ import logoPng from "../assets/favicon.png";
 
 /* ---------- Links ---------- */
 const ANDROID_DOWNLOAD_URL =
-  "https://expo.dev/artifacts/eas/O-aqYgOD_AIN5Gk7nhiXok72gjNF_nnGPH7epZ9yYd4.apk";
+  "https://expo.dev/artifacts/eas/4Gx20XZ9XOaT_nfxTXhsjg7CcsOiiQ2X1lx8xpg2Zgo.apk";
 
 /* ---------- Icons (inline SVG) ---------- */
 const AppleIcon = ({ color = "#fff" }: { color?: string }) => (
