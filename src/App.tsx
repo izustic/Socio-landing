@@ -3,7 +3,7 @@ import logoPng from "../assets/favicon.png";
 
 /* ---------- Links ---------- */
 const ANDROID_DOWNLOAD_URL =
-  "https://expo.dev/artifacts/eas/CvgKs1ZMX3j1WO6gvCg6EuO3kH9TfSf3-C594RQsExU.apk";
+  "https://expo.dev/artifacts/eas/O-aqYgOD_AIN5Gk7nhiXok72gjNF_nnGPH7epZ9yYd4.apk";
 
 /* ---------- Icons (inline SVG) ---------- */
 const AppleIcon = ({ color = "#fff" }: { color?: string }) => (
@@ -440,7 +440,55 @@ function CircleCardScreen() {
 const cta =
   "inline-flex items-center justify-center gap-2 rounded-full font-bold transition-transform duration-150 hover:scale-[1.03]";
 
+function useParallax() {
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMotion.matches) return;
+
+    const layers = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax-speed]"));
+    let frame = 0;
+    const render = () => {
+      frame = 0;
+      const center = window.innerHeight / 2;
+      layers.forEach((layer) => {
+        const speed = Number(layer.dataset.parallaxSpeed ?? 0);
+        const rect = layer.parentElement?.getBoundingClientRect();
+        if (!rect || rect.bottom < -250 || rect.top > window.innerHeight + 250) return;
+        const distance = rect.top + rect.height / 2 - center;
+        const offset = Math.max(-110, Math.min(110, distance * speed));
+        layer.style.setProperty("--parallax-y", `${offset.toFixed(2)}px`);
+      });
+      document.documentElement.style.setProperty(
+        "--journey-progress",
+        `${Math.min(1, window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight))}`,
+      );
+    };
+    const update = () => {
+      if (!frame) frame = requestAnimationFrame(render);
+    };
+    render();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
+}
+
+function JourneyBackdrop() {
+  return (
+    <div className="journey-ui" aria-hidden>
+      <div className="journey-track"><span /></div>
+      <div className="journey-label">THE JOURNEY</div>
+    </div>
+  );
+}
+
 export default function App() {
+  useParallax();
+
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
     return () => {
@@ -449,11 +497,16 @@ export default function App() {
   }, []);
 
   return (
-    <div className="font-[Inter,-apple-system,BlinkMacSystemFont,sans-serif] bg-white text-[#1A1A1A]">
+    <div className="page-shell font-[Inter,-apple-system,BlinkMacSystemFont,sans-serif] bg-white text-[#1A1A1A]">
+      <JourneyBackdrop />
       <Nav />
 
       {/* HERO */}
-      <section className="relative overflow-hidden">
+      <section className="hero-adventure relative overflow-hidden">
+        <div className="hero-sun parallax-layer" data-parallax-speed="0.09" aria-hidden />
+        <div className="hero-orbit parallax-layer" data-parallax-speed="-0.06" aria-hidden />
+        <div className="trail-dot trail-dot-one parallax-layer" data-parallax-speed="0.16" aria-hidden>01</div>
+        <div className="trail-dot trail-dot-two parallax-layer" data-parallax-speed="-0.11" aria-hidden>↗</div>
         <div className="mx-auto flex min-h-[calc(100vh-72px)] max-w-[1280px] flex-col items-center gap-12 px-5 py-16 md:flex-row md:py-20">
           <div className="w-full md:w-[55%]">
             <Reveal>
@@ -501,7 +554,7 @@ export default function App() {
             </Reveal>
           </div>
 
-          <div className="relative w-full md:w-[45%]">
+          <div className="relative w-full md:w-[45%] parallax-layer" data-parallax-speed="0.035">
             <div className="absolute -right-10 top-1/2 -z-10 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-[#FFF4DD] blur-[2px]" />
             <div className="absolute right-20 top-10 -z-10 h-[180px] w-[180px] rounded-[60px] bg-[#FFB60C]/30" />
             <Reveal delay={200}>
@@ -526,7 +579,8 @@ export default function App() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="bg-[#FAFAFA]">
+      <section className="journey-section relative overflow-hidden bg-[#FAFAFA]">
+        <div className="contour contour-right parallax-layer" data-parallax-speed="-0.08" aria-hidden />
         <div className="mx-auto max-w-[1280px] px-5 py-24">
           <Reveal>
             <div className="text-[13px] font-semibold uppercase tracking-[1px] text-[#FFB60C]">
@@ -578,7 +632,8 @@ export default function App() {
       </section>
 
       {/* FEATURE HIGHLIGHT */}
-      <section>
+      <section className="relative overflow-hidden">
+        <div className="contour contour-left parallax-layer" data-parallax-speed="0.075" aria-hidden />
         <div className="mx-auto max-w-[1280px] space-y-24 px-5 py-24">
           <FeatureRow
             tag="For Circle Creators"
@@ -610,7 +665,8 @@ export default function App() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="bg-[#FFF4DD]">
+      <section className="story-section relative overflow-hidden bg-[#FFF4DD]">
+        <div className="story-compass parallax-layer" data-parallax-speed="0.12" aria-hidden>✦</div>
         <div className="mx-auto max-w-[1280px] px-5 py-24">
           <Reveal>
             <div className="text-[13px] font-semibold uppercase tracking-[1px] text-[#D98F00]">
@@ -664,7 +720,8 @@ export default function App() {
       </section>
 
       {/* FEATURE GRID */}
-      <section>
+      <section className="relative overflow-hidden">
+        <div className="feature-glow parallax-layer" data-parallax-speed="-0.1" aria-hidden />
         <div className="mx-auto max-w-[1280px] px-5 py-24">
           <Reveal>
             <div className="text-[13px] font-semibold uppercase tracking-[1px] text-[#FFB60C]">
@@ -725,7 +782,9 @@ export default function App() {
       </section>
 
       {/* FINAL CTA */}
-      <section id="download" className="bg-[#FFB60C]">
+      <section id="download" className="final-adventure relative overflow-hidden bg-[#FFB60C]">
+        <div className="summit summit-back parallax-layer" data-parallax-speed="-0.08" aria-hidden />
+        <div className="summit summit-front parallax-layer" data-parallax-speed="0.05" aria-hidden />
         <div className="mx-auto max-w-[1280px] px-5 py-28 text-center">
           <Reveal>
             <h2

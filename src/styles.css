@@ -141,3 +141,185 @@
     color: var(--color-foreground);
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.page-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.parallax-layer {
+  --parallax-y: 0px;
+  translate: 0 var(--parallax-y);
+  will-change: translate;
+}
+
+.hero-adventure {
+  background:
+    radial-gradient(circle at 76% 42%, rgba(255, 182, 12, 0.1), transparent 29rem),
+    linear-gradient(180deg, #fff 0%, #fff 78%, #fffdf7 100%);
+}
+
+.hero-sun {
+  position: absolute;
+  width: min(44vw, 620px);
+  aspect-ratio: 1;
+  right: -12vw;
+  top: 2rem;
+  border-radius: 999px;
+  background: radial-gradient(circle at 38% 38%, #fff8da 0 13%, #ffd369 42%, #ffb60c 72%);
+  opacity: 0.22;
+  filter: blur(1px);
+}
+
+.hero-orbit {
+  position: absolute;
+  width: min(72vw, 920px);
+  aspect-ratio: 1;
+  right: -28vw;
+  top: -10rem;
+  border: 1px dashed rgba(217, 143, 0, 0.32);
+  border-radius: 50%;
+}
+
+.hero-orbit::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  top: 20%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffb60c;
+  box-shadow: 0 0 0 8px rgba(255, 182, 12, 0.13);
+}
+
+.trail-dot {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(26, 26, 26, 0.1);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.72);
+  color: #d98f00;
+  font-size: 11px;
+  font-weight: 800;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 32px rgba(26, 26, 26, 0.07);
+}
+
+.trail-dot-one { left: 47%; top: 15%; }
+.trail-dot-two { right: 5%; bottom: 12%; font-size: 18px; }
+
+.contour {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border: 1px solid rgba(255, 182, 12, 0.16);
+  border-radius: 44% 56% 62% 38% / 46% 38% 62% 54%;
+  pointer-events: none;
+}
+
+.contour::before,
+.contour::after {
+  content: "";
+  position: absolute;
+  inset: 30px;
+  border: inherit;
+  border-radius: inherit;
+}
+.contour::after { inset: 66px; }
+.contour-right { right: -170px; top: 15%; }
+.contour-left { left: -220px; top: 35%; transform: rotate(38deg); }
+
+.story-compass {
+  position: absolute;
+  right: 7%;
+  top: 8%;
+  color: rgba(217, 143, 0, 0.24);
+  font-size: clamp(90px, 15vw, 190px);
+  line-height: 1;
+}
+
+.feature-glow {
+  position: absolute;
+  left: 55%;
+  top: 25%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: rgba(255, 182, 12, 0.07);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.final-adventure > div:not(.summit) { position: relative; z-index: 2; }
+.summit {
+  position: absolute;
+  bottom: -18%;
+  width: 70%;
+  height: 62%;
+  background: rgba(26, 26, 26, 0.07);
+  clip-path: polygon(0 100%, 28% 42%, 40% 62%, 60% 8%, 100% 100%);
+}
+.summit-back { left: -12%; opacity: 0.45; }
+.summit-front { right: -15%; bottom: -30%; background: rgba(255,255,255,0.17); }
+
+.journey-ui {
+  position: fixed;
+  z-index: 45;
+  left: 18px;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.journey-track {
+  width: 2px;
+  height: 112px;
+  overflow: hidden;
+  border-radius: 9px;
+  background: rgba(26, 26, 26, 0.1);
+}
+.journey-track span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: #ffb60c;
+  transform: scaleY(var(--journey-progress, 0));
+  transform-origin: top;
+}
+.journey-label {
+  writing-mode: vertical-rl;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: rgba(26, 26, 26, 0.32);
+}
+
+@media (max-width: 767px) {
+  .journey-ui { display: none; }
+  .trail-dot-one { left: 8%; top: 48%; }
+  .trail-dot-two { right: 4%; bottom: 4%; }
+  .hero-sun { width: 115vw; right: -58vw; top: 38%; }
+  .hero-orbit { width: 150vw; right: -90vw; top: 28%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .parallax-layer { translate: none !important; }
+  .journey-track span { transition: none; }
+}
