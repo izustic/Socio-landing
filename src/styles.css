@@ -360,8 +360,10 @@ body {
   .hero-sun { width: 115vw; right: -58vw; top: 38%; }
   .hero-orbit { width: 150vw; right: -90vw; top: 28%; }
   .cta-illustration {
-    left: -80px;
+    left: 0px;
     width: 300px;
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 62%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 0%, #000 62%, transparent 100%);
     opacity: 0.28;
   }
   .cta-wave { width: 120%; }
