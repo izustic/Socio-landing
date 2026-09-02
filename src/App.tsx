@@ -585,7 +585,7 @@ export default function App() {
                 <br />
                 Real
                 <br />
-                Friendships.
+                <span className="text-[#6a25d0]">Friendships.</span>
               </h1>
             </Reveal>
             <Reveal delay={160}>
@@ -619,8 +619,13 @@ export default function App() {
               </p>
             </Reveal>
           </div>
+          <img
+            src="assets/sociol-people.png"
+            alt="A group of people connecting on Sociol"
+            className="h-auto max-h-[calc(100vh-8rem)] w-full max-w-full object-contain md:w-[45%]"
+          />
 
-          <div className="relative w-full md:w-[45%] parallax-layer" data-parallax-speed="0.035">
+          {/* <div className="relative w-full md:w-[45%] parallax-layer" data-parallax-speed="0.035">
             <div className="absolute -right-10 top-1/2 -z-10 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-[#FFF4DD] blur-[2px]" />
             <div className="absolute right-20 top-10 -z-10 h-[180px] w-[180px] rounded-[60px] bg-[#FFB60C]/30" />
             <Reveal delay={200}>
@@ -640,7 +645,7 @@ export default function App() {
                 </div>
               </div>
             </Reveal>
-          </div>
+          </div> */}
         </div>
       </section>
 
