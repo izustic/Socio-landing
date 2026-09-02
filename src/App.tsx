@@ -463,7 +463,7 @@ function WaitlistForm({ inverted = false }: { inverted?: boolean }) {
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-[520px]" aria-label="Join the Sociol waitlist">
       <div
-        className={`flex flex-col gap-3 rounded-[20px] p-2 sm:flex-row ${
+        className={`flex flex-col gap-3 rounded-full p-2 sm:flex-row ${
           inverted ? "bg-white/25" : "border border-[#E8E8E8] bg-white shadow-[0_12px_36px_rgba(26,26,26,0.08)]"
         }`}
       >

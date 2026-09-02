@@ -263,6 +263,25 @@ body {
   pointer-events: none;
 }
 
+.waitlist-submit {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.waitlist-submit::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  width: 11px;
+  height: 100%;
+  background: #6a25d0;
+  clip-path: polygon(42% 0, 100% 0, 100% 100%, 30% 100%, 68% 78%, 34% 55%, 70% 31%);
+  pointer-events: none;
+}
+
 .cta-illustration {
   position: absolute;
   z-index: 1;
