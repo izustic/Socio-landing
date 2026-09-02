@@ -1,4 +1,5 @@
 import { useEffect, useRef, type ReactNode } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import logoPng from "../assets/favicon.png";
 
 /* ---------- Links ---------- */
@@ -440,6 +441,67 @@ function CircleCardScreen() {
 const cta =
   "inline-flex items-center justify-center gap-2 rounded-full font-bold transition-transform duration-150 hover:scale-[1.03]";
 
+/* ---------- Waitlist ---------- */
+function WaitlistForm({ inverted = false }: { inverted?: boolean }) {
+  const [state, handleSubmit] = useForm("mbgjokgv");
+
+  if (state.succeeded) {
+    return (
+      <div
+        className={`rounded-2xl px-5 py-4 text-[15px] font-bold ${
+          inverted ? "bg-white text-[#1A1A1A]" : "bg-[#FFF4DD] text-[#9A6600]"
+        }`}
+        role="status"
+      >
+        You’re on the list! We’ll let you know when Sociol launches.
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="w-full max-w-[520px]" aria-label="Join the Sociol waitlist">
+      <div
+        className={`flex flex-col gap-3 rounded-[20px] p-2 sm:flex-row ${
+          inverted ? "bg-white/25" : "border border-[#E8E8E8] bg-white shadow-[0_12px_36px_rgba(26,26,26,0.08)]"
+        }`}
+      >
+        <label htmlFor={`waitlist-email-${inverted ? "final" : "hero"}`} className="sr-only">
+          Email address
+        </label>
+        <input
+          id={`waitlist-email-${inverted ? "final" : "hero"}`}
+          type="email"
+          name="email"
+          autoComplete="email"
+          placeholder="Enter your email address"
+          required
+          className="min-w-0 flex-1 rounded-full bg-white px-5 py-3.5 text-[15px] text-[#1A1A1A] outline-none placeholder:text-[#999] focus:ring-2 focus:ring-[#1A1A1A]/25"
+        />
+        <input type="hidden" name="source" value={inverted ? "final-cta" : "hero"} />
+        <button
+          type="submit"
+          disabled={state.submitting}
+          className={`${cta} shrink-0 px-7 py-3.5 text-[15px] disabled:cursor-not-allowed disabled:opacity-60 ${
+            inverted ? "bg-[#1A1A1A] text-white" : "bg-[#FFB60C] text-[#1A1A1A] hover:bg-[#E0A800]"
+          }`}
+        >
+          {state.submitting ? "Joining…" : "Join the waitlist"}
+        </button>
+      </div>
+      <ValidationError
+        prefix="Email"
+        field="email"
+        errors={state.errors}
+        className={`mt-2 block text-[13px] ${inverted ? "text-[#1A1A1A]" : "text-red-600"}`}
+      />
+      <ValidationError
+        errors={state.errors}
+        className={`mt-2 block text-[13px] ${inverted ? "text-[#1A1A1A]" : "text-red-600"}`}
+      />
+    </form>
+  );
+}
+
 function useParallax() {
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -511,7 +573,7 @@ export default function App() {
           <div className="w-full md:w-[55%]">
             <Reveal>
               <span className="inline-block rounded-full bg-[#FFF4DD] px-3.5 py-1.5 text-[13px] font-semibold uppercase tracking-[1px] text-[#D98F00]">
-                Now available on iOS &amp; Android
+                Coming soon · Join the early list
               </span>
             </Reveal>
             <Reveal delay={80}>
@@ -532,6 +594,10 @@ export default function App() {
               </p>
             </Reveal>
             <Reveal delay={240}>
+              <div className="mt-8">
+                <WaitlistForm />
+              </div>
+              {/* Launch CTA — restore when the apps are publicly available.
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href="#download"
@@ -547,9 +613,9 @@ export default function App() {
                 >
                   <PlayIcon /> Get it on Android
                 </a>
-              </div>
+              </div> */}
               <p className="mt-5 text-[13px] text-[#AAAAAA]">
-                Trusted by 10,000+ people finding their Circle
+                Be first to know when Sociol is ready in your city.
               </p>
             </Reveal>
           </div>
@@ -782,7 +848,7 @@ export default function App() {
       </section>
 
       {/* FINAL CTA */}
-      <section id="download" className="final-adventure relative overflow-hidden bg-[#FFB60C]">
+      <section id="waitlist" className="final-adventure relative overflow-hidden bg-[#FFB60C]">
         <div className="summit summit-back parallax-layer" data-parallax-speed="-0.08" aria-hidden />
         <div className="summit summit-front parallax-layer" data-parallax-speed="0.05" aria-hidden />
         <div className="mx-auto max-w-[1280px] px-5 py-28 text-center">
@@ -791,15 +857,19 @@ export default function App() {
               className="mx-auto max-w-[900px] font-extrabold leading-[1.05] text-[#1A1A1A]"
               style={{ fontSize: "clamp(44px,7vw,72px)", letterSpacing: "-2px" }}
             >
-              Your Circle is waiting.
+              Be first in the Circle.
             </h2>
           </Reveal>
           <Reveal delay={80}>
             <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-[1.6] text-[#1A1A1A]/65">
-              Download Sociol and start building the friendships that actually last.
+              Join the waitlist and we’ll email you as soon as Sociol is ready.
             </p>
           </Reveal>
           <Reveal delay={160}>
+            <div className="mx-auto mt-10 flex max-w-[520px] justify-center">
+              <WaitlistForm inverted />
+            </div>
+            {/* Launch CTA — restore when the apps are publicly available.
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <a
                 href="#download"
@@ -813,11 +883,11 @@ export default function App() {
                 rel="noopener noreferrer"
                 className={`${cta} bg-white px-8 py-4 text-[16px] text-[#1A1A1A]`}
               >
-                <PlayIcon /> Get it on Android
-              </a>
-            </div>
+                  <PlayIcon /> Get it on Android
+                </a>
+            </div> */}
             <p className="mt-6 text-[13px] text-[#1A1A1A]/50">
-              Free to download. No ads. No subscriptions to start.
+              No spam. Just launch updates and early-access news.
             </p>
           </Reveal>
         </div>
@@ -916,11 +986,18 @@ function Nav() {
     >
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5">
         <Logo />
+        {/* Launch CTA — restore when the apps are publicly available.
         <a
           href="#download"
           className="inline-flex items-center justify-center rounded-full bg-[#FFB60C] px-6 py-2.5 text-[14px] font-bold text-[#1A1A1A] transition-colors duration-150 hover:bg-[#E0A800]"
         >
           Download the app
+        </a> */}
+        <a
+          href="#waitlist"
+          className="inline-flex items-center justify-center rounded-full bg-[#FFB60C] px-6 py-2.5 text-[14px] font-bold text-[#1A1A1A] transition-colors duration-150 hover:bg-[#E0A800]"
+        >
+          Join the waitlist
         </a>
       </div>
     </header>
