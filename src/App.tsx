@@ -854,24 +854,31 @@ export default function App() {
 
       {/* FINAL CTA */}
       <section id="waitlist" className="final-adventure relative overflow-hidden bg-[#FFB60C]">
-        <div className="summit summit-back parallax-layer" data-parallax-speed="-0.08" aria-hidden />
-        <div className="summit summit-front parallax-layer" data-parallax-speed="0.05" aria-hidden />
-        <div className="mx-auto max-w-[1280px] px-5 py-28 text-center">
+        <img
+          src="assets/2-girls.png"
+          alt=""
+          className="cta-illustration parallax-layer"
+          data-parallax-speed="0.035"
+          aria-hidden="true"
+        />
+        <div className="cta-wave cta-wave-back" aria-hidden />
+        <div className="cta-wave cta-wave-front" aria-hidden />
+        <div className="relative z-10 mx-auto max-w-[1280px] px-5 py-20 text-center md:py-24">
           <Reveal>
             <h2
-              className="mx-auto max-w-[900px] font-extrabold leading-[1.05] text-[#1A1A1A]"
-              style={{ fontSize: "clamp(44px,7vw,72px)", letterSpacing: "-2px" }}
+              className="mx-auto max-w-[760px] font-extrabold leading-[1.05] text-[#1A1A1A]"
+              style={{ fontSize: "clamp(38px,5vw,56px)", letterSpacing: "-1.8px" }}
             >
               Be first in the Circle.
             </h2>
           </Reveal>
           <Reveal delay={80}>
-            <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-[1.6] text-[#1A1A1A]/65">
+            <p className="mx-auto mt-4 max-w-[560px] text-[16px] leading-[1.6] text-[#1A1A1A]/65">
               Join the waitlist and we’ll email you as soon as Sociol is ready.
             </p>
           </Reveal>
           <Reveal delay={160}>
-            <div className="mx-auto mt-10 flex max-w-[520px] justify-center">
+            <div className="mx-auto mt-7 flex max-w-[520px] justify-center">
               <WaitlistForm inverted />
             </div>
             {/* Launch CTA — restore when the apps are publicly available.
@@ -891,7 +898,7 @@ export default function App() {
                   <PlayIcon /> Get it on Android
                 </a>
             </div> */}
-            <p className="mt-6 text-[13px] text-[#1A1A1A]/50">
+            <p className="mt-4 text-[12px] text-[#1A1A1A]/50">
               No spam. Just launch updates and early-access news.
             </p>
           </Reveal>
@@ -900,12 +907,12 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="border-t border-[#EFEFEF] bg-white">
-        <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-4 px-5 py-8 md:flex-row">
-          <div className="flex items-center gap-3 text-[13px] text-[#AAAAAA]">
+        <div className="mx-auto flex max-w-[1120px] flex-col items-center justify-between gap-4 px-5 py-5 md:flex-row">
+          <div className="flex items-center gap-3 text-[12px] text-[#AAAAAA]">
             <span className="font-extrabold text-[#1A1A1A]">sociol</span>
             <span>© 2026 Sociol. All rights reserved.</span>
           </div>
-          <div className="flex gap-6 text-[13px] text-[#6B6B6B]">
+          <div className="flex gap-6 text-[12px] text-[#6B6B6B]">
             <a href="#" className="hover:underline">
               Privacy Policy
             </a>

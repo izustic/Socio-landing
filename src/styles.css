@@ -263,17 +263,41 @@ body {
   pointer-events: none;
 }
 
-.final-adventure > div:not(.summit) { position: relative; z-index: 2; }
-.summit {
+.cta-illustration {
   position: absolute;
-  bottom: -18%;
-  width: 70%;
-  height: 62%;
-  background: rgba(26, 26, 26, 0.07);
-  clip-path: polygon(0 100%, 28% 42%, 40% 62%, 60% 8%, 100% 100%);
+  z-index: 1;
+  bottom: 0;
+  left: max(0px, calc(50% - 640px));
+  width: clamp(270px, 27vw, 390px);
+  height: 100%;
+  object-fit: cover;
+  object-position: center 46%;
+  pointer-events: none;
 }
-.summit-back { left: -12%; opacity: 0.45; }
-.summit-front { right: -15%; bottom: -30%; background: rgba(255,255,255,0.17); }
+
+.cta-wave {
+  position: absolute;
+  z-index: 0;
+  right: -8%;
+  bottom: -44%;
+  width: 72%;
+  height: 64%;
+  border-radius: 50% 46% 0 0;
+  pointer-events: none;
+}
+
+.cta-wave-back {
+  right: 12%;
+  bottom: -48%;
+  width: 62%;
+  background: rgba(255, 137, 0, 0.34);
+  transform: rotate(-2deg);
+}
+
+.cta-wave-front {
+  background: rgba(255, 116, 0, 0.48);
+  transform: rotate(2deg);
+}
 
 .journey-ui {
   position: fixed;
@@ -316,6 +340,12 @@ body {
   .trail-dot-two { right: 4%; bottom: 4%; }
   .hero-sun { width: 115vw; right: -58vw; top: 38%; }
   .hero-orbit { width: 150vw; right: -90vw; top: 28%; }
+  .cta-illustration {
+    left: -80px;
+    width: 300px;
+    opacity: 0.28;
+  }
+  .cta-wave { width: 120%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
