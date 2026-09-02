@@ -1,6 +1,8 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import logoPng from "../assets/favicon.png";
+import sociolPeoplePng from "../assets/sociol-people.png";
+import twoGirlsPng from "../assets/2-girls.png";
 
 /* ---------- Links ---------- */
 const ANDROID_DOWNLOAD_URL =
@@ -620,7 +622,7 @@ export default function App() {
             </Reveal>
           </div>
           <img
-            src="assets/sociol-people.png"
+            src={sociolPeoplePng}
             alt="A group of people connecting on Sociol"
             className="h-auto max-h-[calc(100vh-8rem)] w-full max-w-full object-contain md:w-[45%]"
           />
@@ -855,7 +857,7 @@ export default function App() {
       {/* FINAL CTA */}
       <section id="waitlist" className="final-adventure relative overflow-hidden bg-[#FFB60C]">
         <img
-          src="assets/2-girls.png"
+          src={twoGirlsPng}
           alt=""
           className="cta-illustration parallax-layer"
           data-parallax-speed="0.035"
