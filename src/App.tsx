@@ -464,7 +464,7 @@ function WaitlistForm({ inverted = false }: { inverted?: boolean }) {
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-[520px]" aria-label="Join the Sociol waitlist">
       <div
-        className={`flex flex-col gap-3 rounded-full p-2 sm:flex-row ${
+       className={`flex flex-col gap-3 rounded-[28px] p-2 sm:flex-row sm:rounded-full ${
           inverted ? "bg-white/25" : "border border-[#E8E8E8] bg-white shadow-[0_12px_36px_rgba(26,26,26,0.08)]"
         }`}
       >
@@ -478,7 +478,8 @@ function WaitlistForm({ inverted = false }: { inverted?: boolean }) {
           autoComplete="email"
           placeholder="Enter your email address"
           required
-          className="min-w-0 flex-1 rounded-full bg-white px-5 py-3.5 text-[15px] text-[#1A1A1A] outline-none placeholder:text-[#999] focus:ring-2 focus:ring-[#1A1A1A]/25"
+          className="min-w-0 flex-1 rounded-full bg-white px-5 py-3.5 text-[16px] sm:text-[15px] text-[#1A1A1A] outline-none placeholder:text-[#999] focus:ring-2 focus:ring-[#1A1A1A]/25"
+          // className="min-w-0 flex-1 rounded-full bg-white px-5 py-3.5 text-[15px] text-[#1A1A1A] outline-none placeholder:text-[#999] focus:ring-2 focus:ring-[#1A1A1A]/25"
         />
         <input type="hidden" name="source" value={inverted ? "final-cta" : "hero"} />
         <button
