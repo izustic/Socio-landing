@@ -3,6 +3,7 @@ import { useForm, ValidationError } from "@formspree/react";
 import logoPng from "../assets/favicon.png";
 import sociolPeoplePng from "../assets/sociol-people.png";
 import twoGirlsPng from "../assets/2-girls.png";
+import foliageRightPng from "../assets/foliage-right.png";
 
 /* ---------- Links ---------- */
 const ANDROID_DOWNLOAD_URL =
@@ -707,7 +708,13 @@ export default function App() {
       {/* FEATURE HIGHLIGHT */}
       <section className="relative overflow-hidden">
         <div className="contour contour-left parallax-layer" data-parallax-speed="0.075" aria-hidden />
-        <div className="mx-auto max-w-[1280px] space-y-24 px-5 py-24">
+        <img
+          src={foliageRightPng}
+          alt=""
+          className="pointer-events-none absolute -right-[8%] -bottom-5 w-[clamp(220px,30vw,440px)] opacity-30"
+          aria-hidden="true"
+        />
+        <div className="relative z-10 mx-auto max-w-[1280px] space-y-24 px-5 py-24">
           <FeatureRow
             tag="For Circle Creators"
             title="You choose who's in your Circle."
