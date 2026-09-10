@@ -1,5 +1,6 @@
-import { useEffect, useRef, type ReactNode } from "react";
-import { useForm, ValidationError } from "@formspree/react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useSubmit, ValidationError, type TUseForm } from "@formspree/react";
+import { joinWaitlist } from "./waitlist";
 import logoPng from "../assets/favicon.png";
 import sociolPeoplePng from "../assets/sociol-people.png";
 import twoGirlsPng from "../assets/2-girls.png";
@@ -446,7 +447,41 @@ const cta =
 
 /* ---------- Waitlist ---------- */
 function WaitlistForm({ inverted = false }: { inverted?: boolean }) {
-  const [state, handleSubmit] = useForm("mbgjokgv");
+  const submit = useSubmit("mbgjokgv");
+  const [state, setState] = useState<TUseForm<Record<string, string>>[0]>({
+    errors: null, result: null, submitting: false, succeeded: false,
+  });
+  const [message, setMessage] = useState("");
+  const submitting = useRef(false);
+  const messageId = `waitlist-message-${inverted ? "final" : "hero"}`;
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (submitting.current) return;
+    const data = new FormData(event.currentTarget);
+    submitting.current = true;
+    setMessage("");
+    setState((previous) => ({ ...previous, submitting: true, errors: null }));
+    try {
+      const outcome = await joinWaitlist(String(data.get("email") ?? ""), async (email) => {
+        data.set("email", email);
+        const result = await submit(data);
+        if (result.kind === "error") {
+          setState((previous) => ({ ...previous, errors: result }));
+          return false;
+        }
+        setState((previous) => ({ ...previous, result, succeeded: true }));
+        return true;
+      });
+      if (outcome === "duplicate") setMessage("This email is already on the waitlist.");
+      if (outcome === "pending") setMessage("This email is being added. Please wait.");
+    } catch {
+      setMessage("We couldn’t add you right now. Please try again.");
+    } finally {
+      submitting.current = false;
+      setState((previous) => ({ ...previous, submitting: false }));
+    }
+  }
 
   if (state.succeeded) {
     return (
@@ -476,6 +511,8 @@ function WaitlistForm({ inverted = false }: { inverted?: boolean }) {
           type="email"
           name="email"
           autoComplete="email"
+          aria-describedby={message ? messageId : undefined}
+          onChange={() => setMessage("")}
           placeholder="Enter your email address"
           required
           className="min-w-0 flex-1 rounded-full bg-white px-5 py-3.5 text-[16px] sm:text-[15px] text-[#1A1A1A] outline-none placeholder:text-[#999] focus:ring-2 focus:ring-[#1A1A1A]/25"
@@ -492,6 +529,11 @@ function WaitlistForm({ inverted = false }: { inverted?: boolean }) {
           {state.submitting ? "Joining…" : "Join the waitlist"}
         </button>
       </div>
+      {message && (
+        <p id={messageId} role="status" className={`mt-2 text-[13px] ${inverted ? "text-[#1A1A1A]" : "text-red-600"}`}>
+          {message}
+        </p>
+      )}
       <ValidationError
         prefix="Email"
         field="email"
