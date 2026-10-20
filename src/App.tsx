@@ -5,6 +5,8 @@ import logoPng from "../assets/favicon.png";
 import sociolPeoplePng from "../assets/sociol-people.png";
 import twoGirlsPng from "../assets/2-girls.png";
 import foliageRightPng from "../assets/foliage-right.png";
+import termsMarkdown from "./legal/terms-of-use.md?raw";
+import privacyMarkdown from "./legal/privacy-policy.md?raw";
 
 /* ---------- Links ---------- */
 const ANDROID_DOWNLOAD_URL =
@@ -595,6 +597,10 @@ function JourneyBackdrop() {
 }
 
 export default function App() {
+  const pathname = window.location.pathname.replace(/\/$/, "");
+  if (pathname === "/privacy-policy" || pathname === "/terms-of-service") {
+    return <LegalPage kind={pathname === "/privacy-policy" ? "privacy" : "terms"} />;
+  }
   useParallax();
 
   useEffect(() => {
@@ -958,26 +964,68 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-[#EFEFEF] bg-white">
-        <div className="mx-auto flex max-w-[1120px] flex-col items-center justify-between gap-4 px-5 py-5 md:flex-row">
-          <div className="flex items-center gap-3 text-[12px] text-[#AAAAAA]">
-            <span className="font-extrabold text-[#1A1A1A]">sociol</span>
-            <span>© 2026 Sociol. All rights reserved.</span>
-          </div>
-          <div className="flex gap-6 text-[12px] text-[#6B6B6B]">
-            <a href="#" className="hover:underline">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:underline">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:underline">
-              Contact
-            </a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
+  );
+}
+
+function LegalPage({ kind }: { kind: "privacy" | "terms" }) {
+  const isPrivacy = kind === "privacy";
+  const markdown = isPrivacy ? privacyMarkdown : termsMarkdown;
+  const title = isPrivacy ? "Privacy Policy" : "Terms of Service";
+  const sections = markdown.split(/^## /m).slice(1).map((part) => {
+    const [heading, ...body] = part.split("\n");
+    return { heading: heading.trim(), body: body.join("\n").trim() };
+  });
+  const intro = isPrivacy
+    ? "Good friendships start with trust."
+    : "Make room for real connection.";
+  const summary = isPrivacy
+    ? "This notice explains how information may be used when you create a profile, join a Circle, and make plans with people nearby."
+    : "These terms cover your use of Sociol: a place to meet people in small Circles and make plans to spend time together offline.";
+  return (
+    <div className="page-shell font-[Inter,-apple-system,BlinkMacSystemFont,sans-serif] bg-white text-[#1A1A1A]">
+      <Nav />
+      <main>
+        <section className="legal-hero">
+          <div className="legal-wrap">
+            <a className="legal-back" href="/">← &nbsp;Back to Sociol</a>
+            <div className="legal-kicker"><span />{isPrivacy ? "YOUR PRIVACY, IN PLAIN LANGUAGE" : "THE GROUND RULES FOR GETTING TOGETHER"}</div>
+            <div className="legal-headline-row">
+              <h1>{intro}</h1>
+              <aside>{summary}<strong>SOCIOL / {title.toUpperCase()}</strong></aside>
+            </div>
+          </div>
+        </section>
+        <section className="legal-content mx-auto max-w-[1280px] px-5">
+          <nav className="legal-toc" aria-label="On this page"><h2>ON THIS PAGE</h2>{sections.map((section, i) => <a key={section.heading} href={`#section-${i + 1}`}><b>{String(i + 1).padStart(2, "0")}</b><span>{section.heading}</span></a>)}</nav>
+          <article className="legal-article"><div className="legal-article-label"><span />{title.toUpperCase()}</div>
+            <div className="legal-meta">{markdown.match(/Last updated: .+/)?.[0]}</div>
+            {sections.map((section, i) => <section id={`section-${i + 1}`} className="legal-section" key={section.heading}><div className="legal-number">{String(i + 1).padStart(2, "0")}</div><div><h2>{section.heading}</h2>{section.body.split(/\n\s*\n/).map((paragraph, p) => paragraph.startsWith("- ") ? <ul key={p}>{paragraph.split("\n").map((line) => <li key={line}>{line.replace(/^- /, "")}</li>)}</ul> : <p key={p}>{paragraph.replace(/\*\*(.*?)\*\*/g, "$1")}</p>)}</div></section>)}
+          </article>
+        </section>
+        <section id="download" className="legal-cta"><div className="legal-wrap"><div><span>MORE THAN A SCROLL</span><h2>Your Circle is waiting.</h2></div><a href="/">Find your Circle ↗</a></div></section>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="border-t border-[#EFEFEF] bg-white">
+        <div className="mx-auto flex max-w-[1120px] flex-col items-center justify-between gap-4 px-5 py-5 md:flex-row">
+        <div className="flex items-center gap-3 text-[12px] text-[#AAAAAA]">
+          <a href="/" className="font-extrabold text-[#1A1A1A] hover:underline" aria-label="Sociol home">sociol</a>
+          <span>© 2026 Sociol. All rights reserved.</span>
+        </div>
+        <div className="flex gap-6 text-[12px] text-[#6B6B6B]">
+          <a href="/privacy-policy" className="hover:underline">Privacy Policy</a>
+          <a href="/terms-of-service" className="hover:underline">Terms of Service</a>
+          <a href="mailto:privacy@sociol.app" className="hover:underline">Contact</a>
+        </div>
+      </div>
+    </footer>
   );
 }
 
@@ -1049,7 +1097,9 @@ function Nav() {
       style={{ borderBottomColor: "transparent", transition: "border-color 200ms ease" }}
     >
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5">
-        <Logo />
+        <a href="/" aria-label="Sociol home" className="inline-flex items-center text-inherit no-underline">
+          <Logo />
+        </a>
         {/* Launch CTA — restore when the apps are publicly available.
         <a
           href="#download"
@@ -1058,7 +1108,7 @@ function Nav() {
           Download the app
         </a> */}
         <a
-          href="#waitlist"
+          href={window.location.pathname === "/" ? "#waitlist" : "/#waitlist"}
           className="inline-flex items-center justify-center rounded-full bg-[#FFB60C] px-6 py-2.5 text-[14px] font-bold text-[#1A1A1A] transition-colors duration-150 hover:bg-[#E0A800]"
         >
           Join the waitlist
