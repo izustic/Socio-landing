@@ -1012,16 +1012,18 @@ body {
   text-transform: uppercase;
 }
 .scrap-ticker .ticker-track {
+  display: flex;
   width: max-content;
   animation: scrap-marquee 48s linear infinite;
+  will-change: transform;
 }
 .scrap-ticker .ticker-group {
-  display: block;
+  flex: 0 0 max-content;
 }
 .scrap-ticker .ticker-group span { margin-right: 3rem; }
 @keyframes scrap-marquee {
-  from { transform: translateX(100vw); }
-  to { transform: translateX(-100%); }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 .scrap-section {
   padding: 84px 0;
