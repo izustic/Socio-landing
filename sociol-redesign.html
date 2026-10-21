@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f8f4eb" />
+    <title>Sociol — Find your people</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+      :root {
+        --paper: #f8f4eb;
+        --ink: #24251f;
+        --muted: #73746a;
+        --orange: #ff6542;
+        --blue: #b9d8ff;
+        --lime: #dcf36a;
+        --pink: #ffb8cf;
+        --purple: #d4c7ff;
+        --line: #ddd6c9;
+        --white: #fffdf7;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "DM Sans", sans-serif;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      .wrap {
+        width: min(1160px, calc(100% - 44px));
+        margin: auto;
+      }
+      .mono {
+        font:
+          11px "DM Mono",
+          monospace;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .topbar {
+        height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font: 700 25px "Space Grotesk";
+        letter-spacing: -0.08em;
+      }
+      .brand-mark {
+        width: 33px;
+        height: 33px;
+        background: var(--orange);
+        border-radius: 50% 50% 45% 12%;
+        display: grid;
+        place-items: center;
+        font-size: 17px;
+        transform: rotate(-9deg);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        font-size: 13px;
+      }
+      .nav a:not(.cta) {
+        opacity: 0.75;
+      }
+      .nav a:hover {
+        opacity: 1;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 13px;
+        padding: 13px 18px;
+        background: var(--ink);
+        color: var(--white);
+        border-radius: 30px;
+        font-size: 13px;
+        transition: 0.2s;
+        border: 1px solid var(--ink);
+      }
+      .cta:hover {
+        transform: translateY(-3px);
+        box-shadow: 3px 4px 0 var(--orange);
+      }
+      .cta.light {
+        background: transparent;
+        color: var(--ink);
+      }
+      .hero {
+        padding: 82px 0 74px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 45px;
+        overflow: hidden;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        margin-bottom: 27px;
+      }
+      .spark {
+        color: var(--orange);
+        font-size: 20px;
+      }
+      .hero h1 {
+        font: 600 clamp(54px, 7.4vw, 96px)/0.91 "Space Grotesk";
+        letter-spacing: -0.09em;
+        margin: 0;
+        max-width: 720px;
+      }
+      .hero h1 em {
+        font-family: Georgia, serif;
+        font-weight: 400;
+        letter-spacing: -0.08em;
+      }
+      .underline {
+        position: relative;
+        z-index: 0;
+        white-space: nowrap;
+      }
+      .underline:after {
+        content: "";
+        position: absolute;
+        left: -3%;
+        right: -4%;
+        bottom: 0;
+        height: 23%;
+        background: var(--lime);
+        z-index: -1;
+        transform: rotate(-2deg);
+      }
+      .hero-copy {
+        font-size: 17px;
+        line-height: 1.6;
+        max-width: 440px;
+        color: #505148;
+        margin: 26px 0;
+      }
+      .actions {
+        display: flex;
+        gap: 11px;
+        flex-wrap: wrap;
+      }
+      .tiny-note {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 17px;
+      }
+      .hero-art {
+        height: 440px;
+        position: relative;
+        display: grid;
+        place-items: center;
+      }
+      .blob {
+        width: 320px;
+        height: 350px;
+        background: var(--blue);
+        border: 1.5px solid var(--ink);
+        border-radius: 48% 52% 38% 62% / 43% 40% 60% 57%;
+        transform: rotate(8deg);
+        position: absolute;
+      }
+      .circle-person {
+        position: absolute;
+        z-index: 2;
+        width: 108px;
+        height: 130px;
+        border: 1.5px solid var(--ink);
+        border-radius: 55px 55px 35px 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 54px;
+        box-shadow: 4px 5px 0 #24251f1b;
+      }
+      .person-one {
+        background: var(--pink);
+        left: 19%;
+        top: 16%;
+        transform: rotate(-12deg);
+      }
+      .person-two {
+        background: var(--lime);
+        right: 16%;
+        top: 25%;
+        transform: rotate(10deg);
+      }
+      .person-three {
+        background: var(--orange);
+        left: 38%;
+        bottom: 12%;
+        transform: rotate(-3deg);
+      }
+      .orbit {
+        position: absolute;
+        width: 390px;
+        height: 260px;
+        border: 1.5px dashed var(--ink);
+        border-radius: 50%;
+        transform: rotate(-28deg);
+      }
+      .sticker {
+        position: absolute;
+        z-index: 4;
+        padding: 13px 16px;
+        background: var(--white);
+        border: 1.5px solid var(--ink);
+        font: italic 16px Georgia;
+        box-shadow: 4px 4px 0 var(--ink);
+      }
+      .sticker.note {
+        top: 6%;
+        right: 2%;
+        transform: rotate(8deg);
+      }
+      .sticker.badge {
+        left: 2%;
+        bottom: 12%;
+        background: var(--lime);
+        border-radius: 50%;
+        width: 90px;
+        height: 90px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        font: 10px "DM Mono";
+        transform: rotate(-12deg);
+        box-shadow: none;
+      }
+      .sticker.heart {
+        right: 4%;
+        bottom: 17%;
+        background: var(--pink);
+        font-size: 28px;
+        padding: 9px 13px;
+        transform: rotate(10deg);
+      }
+      .ticker {
+        overflow: hidden;
+        white-space: nowrap;
+        background: var(--lime);
+        border-block: 1.5px solid var(--ink);
+        padding: 14px 0;
+      }
+      .ticker-track {
+        display: inline-block;
+        animation: marquee 30s linear infinite;
+        font: 11px "DM Mono";
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .ticker-track span {
+        padding: 0 27px;
+      }
+      @keyframes marquee {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      .section {
+        padding: 85px 0;
+      }
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 35px;
+      }
+      .section-head h2 {
+        font: 600 clamp(36px, 5.5vw, 62px)/0.96 "Space Grotesk";
+        letter-spacing: -0.08em;
+        margin: 10px 0 0;
+      }
+      .section-head h2 em {
+        font-family: Georgia, serif;
+        font-weight: 400;
+      }
+      .section-note {
+        max-width: 260px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+      }
+      .step {
+        min-height: 270px;
+        padding: 23px;
+        border: 1.5px solid var(--ink);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+      }
+      .step:nth-child(1) {
+        background: var(--pink);
+        transform: rotate(-1deg);
+      }
+      .step:nth-child(2) {
+        background: var(--blue);
+        transform: rotate(0.5deg);
+      }
+      .step:nth-child(3) {
+        background: var(--orange);
+        transform: rotate(-0.5deg);
+      }
+      .step-num {
+        font: 11px "DM Mono";
+        display: flex;
+        justify-content: space-between;
+      }
+      .step-emoji {
+        font-size: 48px;
+        align-self: flex-end;
+        filter: drop-shadow(2px 2px 0 #24251f22);
+      }
+      .step h3 {
+        font: 600 29px/0.98 "Space Grotesk";
+        letter-spacing: -0.06em;
+        margin: 24px 0 10px;
+        max-width: 230px;
+      }
+      .step p {
+        font-size: 13px;
+        line-height: 1.6;
+        max-width: 260px;
+        margin: 0;
+      }
+      .manifesto {
+        background: var(--ink);
+        color: var(--paper);
+        padding: 78px 0;
+      }
+      .manifesto-grid {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .manifesto-art {
+        min-height: 310px;
+        background: var(--purple);
+        color: var(--ink);
+        padding: 25px;
+        position: relative;
+        overflow: hidden;
+        transform: rotate(-2deg);
+      }
+      .manifesto-art .big {
+        font: 700 clamp(46px, 6vw, 78px)/0.82 "Space Grotesk";
+        letter-spacing: -0.1em;
+        margin-top: 50px;
+        position: relative;
+        z-index: 2;
+      }
+      .manifesto-art .doodle {
+        position: absolute;
+        right: 20px;
+        top: 8px;
+        font-size: 90px;
+        transform: rotate(15deg);
+      }
+      .manifesto-art .label {
+        position: absolute;
+        bottom: 20px;
+        left: 25px;
+      }
+      .manifesto h2 {
+        font: 600 clamp(38px, 5vw, 60px)/0.97 "Space Grotesk";
+        letter-spacing: -0.08em;
+        margin: 12px 0 20px;
+      }
+      .manifesto h2 em {
+        font-family: Georgia, serif;
+        font-weight: 400;
+        color: var(--lime);
+      }
+      .manifesto p {
+        font-size: 16px;
+        line-height: 1.75;
+        color: #d0d0c5;
+        max-width: 500px;
+      }
+      .manifesto .mono {
+        color: #aaa99e;
+      }
+      .circles {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .circle-card {
+        border: 1.5px solid var(--ink);
+        padding: 20px;
+        background: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+      .circle-card.featured {
+        background: var(--blue);
+      }
+      .circle-card h3 {
+        font: 600 27px "Space Grotesk";
+        letter-spacing: -0.06em;
+        margin: 26px 0 9px;
+      }
+      .circle-card p {
+        font-size: 13px;
+        line-height: 1.6;
+        max-width: 400px;
+      }
+      .circle-visual {
+        height: 160px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mini-face {
+        width: 65px;
+        height: 78px;
+        border: 1.5px solid var(--ink);
+        border-radius: 50% 50% 40% 40%;
+        display: grid;
+        place-items: center;
+        font-size: 33px;
+        position: absolute;
+        box-shadow: 3px 3px 0 #24251f20;
+      }
+      .mini-face:nth-child(1) {
+        background: var(--pink);
+        transform: rotate(-14deg);
+        left: 24%;
+      }
+      .mini-face:nth-child(2) {
+        background: var(--lime);
+        z-index: 2;
+        top: 18px;
+      }
+      .mini-face:nth-child(3) {
+        background: var(--orange);
+        transform: rotate(13deg);
+        right: 22%;
+      }
+      .circle-card .mono {
+        font-size: 10px;
+      }
+      .circle-link {
+        display: inline-flex;
+        border-bottom: 1px solid;
+        font-size: 12px;
+        padding-bottom: 4px;
+        margin-top: 8px;
+      }
+      .quote-section {
+        padding: 80px 0;
+        background: #eee7da;
+        border-block: 1px solid var(--line);
+      }
+      .quote-box {
+        max-width: 850px;
+        margin: auto;
+        text-align: center;
+      }
+      .quote-mark {
+        font: 80px Georgia;
+        color: var(--orange);
+        line-height: 0.8;
+      }
+      .quote-box blockquote {
+        font:
+          italic clamp(30px, 5vw, 54px)/1.1 Georgia,
+          serif;
+        letter-spacing: -0.04em;
+        margin: 15px 0 25px;
+      }
+      .quote-box p {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .faq {
+        display: grid;
+        grid-template-columns: 0.75fr 1.25fr;
+        gap: 60px;
+      }
+      .faq-list details {
+        border-bottom: 1px solid var(--line);
+        padding: 18px 0;
+      }
+      .faq-list summary {
+        cursor: pointer;
+        list-style: none;
+        font: 600 17px "Space Grotesk";
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      .faq-list summary:after {
+        content: "+";
+        font: 22px "DM Sans";
+      }
+      .faq-list details[open] summary:after {
+        content: "−";
+      }
+      .faq-list details p {
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--muted);
+        max-width: 520px;
+      }
+      .final-cta {
+        background: var(--orange);
+        padding: 76px 0 25px;
+        border-top: 1.5px solid var(--ink);
+      }
+      .final-grid {
+        display: grid;
+        grid-template-columns: 1fr 0.7fr;
+        align-items: center;
+        gap: 30px;
+      }
+      .final-cta h2 {
+        font: 600 clamp(52px, 8vw, 94px)/0.9 "Space Grotesk";
+        letter-spacing: -0.09em;
+        margin: 18px 0 25px;
+        max-width: 730px;
+      }
+      .final-cta h2 em {
+        font-family: Georgia, serif;
+        font-weight: 400;
+      }
+      .final-cta p {
+        max-width: 410px;
+        font-size: 15px;
+        line-height: 1.65;
+      }
+      .final-art {
+        height: 250px;
+        position: relative;
+      }
+      .final-art .sun {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border: 1.5px solid var(--ink);
+        border-radius: 50%;
+        background: var(--lime);
+        display: grid;
+        place-items: center;
+        font-size: 70px;
+        left: 12%;
+        top: 20px;
+      }
+      .final-art .paper-note {
+        position: absolute;
+        background: var(--white);
+        border: 1.5px solid var(--ink);
+        padding: 18px;
+        font: italic 20px Georgia;
+        right: 5%;
+        bottom: 25px;
+        transform: rotate(8deg);
+        box-shadow: 5px 5px 0 var(--ink);
+      }
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+        margin-top: 65px;
+        padding-top: 17px;
+        border-top: 1px solid #24251f55;
+        font: 10px "DM Mono";
+        text-transform: uppercase;
+      }
+      .footer-links {
+        display: flex;
+        gap: 18px;
+      }
+      @media (max-width: 760px) {
+        .wrap {
+          width: calc(100% - 30px);
+        }
+        .topbar {
+          height: 65px;
+        }
+        .nav {
+          gap: 14px;
+        }
+        .nav > a:not(.cta) {
+          display: none;
+        }
+        .hero {
+          padding: 55px 0 35px;
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .hero h1 {
+          font-size: clamp(54px, 13vw, 86px);
+        }
+        .hero-art {
+          height: 340px;
+          max-width: 500px;
+          width: 100%;
+          margin: auto;
+        }
+        .blob {
+          width: 260px;
+          height: 280px;
+        }
+        .orbit {
+          width: 300px;
+          height: 210px;
+        }
+        .circle-person {
+          width: 85px;
+          height: 105px;
+          font-size: 43px;
+        }
+        .person-one {
+          left: 18%;
+        }
+        .person-two {
+          right: 15%;
+        }
+        .section {
+          padding: 60px 0;
+        }
+        .section-head {
+          align-items: start;
+          flex-direction: column;
+        }
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        .step {
+          min-height: 220px;
+        }
+        .manifesto-grid,
+        .faq,
+        .final-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        .manifesto {
+          padding: 60px 0;
+        }
+        .manifesto-art {
+          min-height: 260px;
+        }
+        .circles {
+          grid-template-columns: 1fr;
+        }
+        .circle-card {
+          min-height: 300px;
+        }
+        .quote-section {
+          padding: 60px 0;
+        }
+        .final-cta {
+          padding-top: 55px;
+        }
+        .final-art {
+          max-width: 420px;
+          width: 100%;
+          margin: auto;
+        }
+        .footer {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .footer-links {
+          flex-wrap: wrap;
+        }
+        .section-note {
+          max-width: 360px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .ticker-track {
+          animation: none;
+        }
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="wrap topbar">
+      <a class="brand" href="#home" aria-label="Sociol home"
+        ><span class="brand-mark">✳</span>sociol<span style="color: var(--orange)">.</span></a
+      >
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#how">How it works</a><a href="#circles">Your circle</a><a href="#faq">FAQs</a
+        ><a class="cta" href="#join">Find your people ↗</a>
+      </nav>
+    </header>
+    <main>
+      <section class="hero wrap" id="home">
+        <div>
+          <div class="eyebrow mono">
+            <span class="spark">✳</span> Less scrolling. More belonging.
+          </div>
+          <h1>
+            Life’s better<br />with <em>your kind</em><br />of
+            <span class="underline">people.</span>
+          </h1>
+          <p class="hero-copy">
+            Making new friends as an adult shouldn’t feel like a job interview. Sociol helps you
+            find your people and build the kind of friendships that fit real life.
+          </p>
+          <div class="actions">
+            <a class="cta" href="#join">Find your circle <span>↗</span></a
+            ><a class="cta light" href="#how">How it works ↓</a>
+          </div>
+          <p class="tiny-note">
+            For the curious, the quiet, the new-in-town, and everyone in between.
+          </p>
+        </div>
+        <div class="hero-art" aria-label="Playful illustration of people finding their circle">
+          <div class="blob"></div>
+          <div class="orbit"></div>
+          <div class="circle-person person-one">☺</div>
+          <div class="circle-person person-two">✿</div>
+          <div class="circle-person person-three">☻</div>
+          <div class="sticker note">your people<br />are out there ✎</div>
+          <div class="sticker badge">GOOD<br />FRIENDS<br />TAKE TIME</div>
+          <div class="sticker heart">♥</div>
+        </div>
+      </section>
+      <div class="ticker">
+        <div class="ticker-track">
+          <span>Find your people ✳</span><span>Friendship, at your pace ☺</span
+          ><span>Small circles, real connection ↗</span><span>Make room for new friends ✿</span
+          ><span>Find your people ✳</span><span>Friendship, at your pace ☺</span
+          ><span>Small circles, real connection ↗</span><span>Make room for new friends ✿</span>
+        </div>
+      </div>
+      <section class="section wrap" id="how">
+        <div class="section-head">
+          <div>
+            <div class="mono">01 / The idea</div>
+            <h2>Meet people.<br /><em>Make it real.</em></h2>
+          </div>
+          <p class="section-note">
+            No pressure to become best friends overnight. Just a better starting point for
+            meaningful connection.
+          </p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-num"><span>STEP 01</span><span>✳</span></div>
+            <div>
+              <div class="step-emoji">🧩</div>
+              <h3>Show up as yourself.</h3>
+              <p>
+                Your interests, your energy, your way of socialising. There’s no one-size-fits-all
+                way to connect.
+              </p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-num"><span>STEP 02</span><span>↗</span></div>
+            <div>
+              <div class="step-emoji">🫶</div>
+              <h3>Find your kind of people.</h3>
+              <p>
+                Discover people you might genuinely click with, not just another face in an endless
+                feed.
+              </p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-num"><span>STEP 03</span><span>♥</span></div>
+            <div>
+              <div class="step-emoji">☕</div>
+              <h3>Let friendship happen.</h3>
+              <p>
+                Start with a conversation, shared interests, and small plans. Let the good stuff
+                grow naturally.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="manifesto">
+        <div class="wrap manifesto-grid">
+          <div class="manifesto-art">
+            <span class="mono">A note from us</span><span class="doodle">✳</span>
+            <div class="big">
+              You don’t<br />need a crowd.<br />You need<br /><span style="color: var(--orange)"
+                >your people.</span
+              >
+            </div>
+            <span class="mono label">Keep it small. Keep it real.</span>
+          </div>
+          <div>
+            <div class="mono">02 / A different kind of social</div>
+            <h2>Connection over<br /><em>collecting contacts.</em></h2>
+            <p>
+              We think friendship should feel less like performing and more like being understood.
+              Sociol is built around the idea that a few people who really get you can mean more
+              than a thousand casual connections.
+            </p>
+            <p>Come as you are. Take your time. Build a circle that feels like yours.</p>
+            <a
+              class="cta"
+              style="
+                background: var(--lime);
+                color: var(--ink);
+                border-color: var(--lime);
+                margin-top: 10px;
+              "
+              href="#join"
+              >Sounds like my kind of thing ↗</a
+            >
+          </div>
+        </div>
+      </section>
+      <section class="section wrap" id="circles">
+        <div class="section-head">
+          <div>
+            <div class="mono">03 / Your kind of connection</div>
+            <h2>There’s room<br />for <em>your vibe.</em></h2>
+          </div>
+          <p class="section-note">
+            Friendship looks different for everyone. Start with the things that feel like you.
+          </p>
+        </div>
+        <div class="circles">
+          <article class="circle-card featured">
+            <div class="mono">For the low-key ones</div>
+            <div class="circle-visual">
+              <span class="mini-face">☻</span><span class="mini-face">☺</span
+              ><span class="mini-face">✿</span>
+            </div>
+            <h3>Quiet company counts.</h3>
+            <p>
+              For people who prefer one good conversation, a shared hobby, or just being comfortable
+              in the same room.
+            </p>
+            <a href="#join" class="circle-link">Find your pace ↗</a>
+          </article>
+          <article class="circle-card">
+            <div class="mono">For the curious ones</div>
+            <div class="circle-visual">
+              <span class="mini-face" style="background: var(--purple)">✦</span
+              ><span class="mini-face" style="background: var(--orange)">☺</span
+              ><span class="mini-face" style="background: var(--blue)">☻</span>
+            </div>
+            <h3>Meet beyond your bubble.</h3>
+            <p>
+              For people ready to try a new interest, swap perspectives, and make space for fresh
+              friendships.
+            </p>
+            <a href="#join" class="circle-link">Start exploring ↗</a>
+          </article>
+        </div>
+      </section>
+      <section class="quote-section">
+        <div class="wrap quote-box">
+          <div class="quote-mark">“</div>
+          <blockquote>Friendship doesn’t have to be loud to be life-changing.</blockquote>
+          <p class="mono">A little reminder from Sociol</p>
+        </div>
+      </section>
+      <section class="section wrap faq" id="faq">
+        <div>
+          <div class="mono">04 / Good questions</div>
+          <h2
+            style="
+              font: 600 clamp(36px, 5vw, 58px)/0.96 &quot;Space Grotesk&quot;;
+              letter-spacing: -0.08em;
+              margin: 12px 0;
+            "
+          >
+            Before you<br /><em style="font-family: Georgia, serif; font-weight: 400"
+              >say hello.</em
+            >
+          </h2>
+          <p style="font-size: 14px; line-height: 1.7; color: var(--muted); max-width: 300px">
+            A few things you might be wondering about finding friends with Sociol.
+          </p>
+        </div>
+        <div class="faq-list">
+          <details open>
+            <summary>What is Sociol?</summary>
+            <p>
+              Sociol is a social connection concept designed to help people discover compatible
+              friends and build smaller, more meaningful circles.
+            </p>
+          </details>
+          <details>
+            <summary>Is this a dating app?</summary>
+            <p>
+              Sociol is focused on friendship and community, not romantic matching. The goal is to
+              help you find people you can connect with in everyday life.
+            </p>
+          </details>
+          <details>
+            <summary>What if I’m introverted or a little shy?</summary>
+            <p>
+              You don’t need to be the loudest person in the room. Take your time, start with shared
+              interests, and connect in a way that feels comfortable to you.
+            </p>
+          </details>
+          <details>
+            <summary>How do I get started?</summary>
+            <p>
+              Use the early-access link below to visit Sociol’s current app experience and see
+              what’s available.
+            </p>
+          </details>
+        </div>
+      </section>
+      <section class="final-cta" id="join">
+        <div class="wrap">
+          <div class="final-grid">
+            <div>
+              <div class="mono">05 / Your people are out there</div>
+              <h2>Make space<br />for <em>good people.</em></h2>
+              <p>
+                New friends. Familiar feelings. More moments that make everyday life better. Your
+                next chapter could start with a hello.
+              </p>
+              <a
+                class="cta"
+                href="https://socio-network.netlify.app/"
+                target="_blank"
+                rel="noreferrer"
+                style="background: var(--ink); color: white"
+                >Explore Sociol <span>↗</span></a
+              >
+            </div>
+            <div class="final-art">
+              <div class="sun">✳</div>
+              <div class="paper-note">a little hello<br />can go a long way ♥</div>
+            </div>
+          </div>
+          <footer class="footer">
+            <a class="brand" href="#home" style="font-size: 18px"
+              ><span class="brand-mark" style="width: 25px; height: 25px; font-size: 12px">✳</span
+              >sociol.</a
+            ><span>Friendship, at your pace.</span>
+            <div class="footer-links">
+              <a href="#how">How it works</a><a href="#faq">FAQs</a
+              ><a href="https://socio-network.netlify.app/" target="_blank" rel="noreferrer"
+                >Get started ↗</a
+              >
+            </div>
+            <span>© 2026 Sociol</span>
+          </footer>
+        </div>
+      </section>
+    </main>
+    <script>
+      document.querySelectorAll('a[href^="#"]').forEach((a) =>
+        a.addEventListener("click", (e) => {
+          const el = document.querySelector(a.getAttribute("href"));
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: "smooth" });
+          }
+        }),
+      );
+    </script>
+  </body>
+</html>

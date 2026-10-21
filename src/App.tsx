@@ -5,6 +5,8 @@ import logoPng from "../assets/favicon.png";
 import sociolPeoplePng from "../assets/sociol-people.png";
 import twoGirlsPng from "../assets/2-girls.png";
 import foliageRightPng from "../assets/foliage-right.png";
+import foliageLeftPng from "../assets/foliage-left.png";
+import logoFullPng from "../assets/logo.png";
 import termsMarkdown from "./legal/terms-of-use.md?raw";
 import privacyMarkdown from "./legal/privacy-policy.md?raw";
 
@@ -451,7 +453,10 @@ const cta =
 function WaitlistForm({ inverted = false }: { inverted?: boolean }) {
   const submit = useSubmit("mbgjokgv");
   const [state, setState] = useState<TUseForm<Record<string, string>>[0]>({
-    errors: null, result: null, submitting: false, succeeded: false,
+    errors: null,
+    result: null,
+    submitting: false,
+    succeeded: false,
   });
   const [message, setMessage] = useState("");
   const submitting = useRef(false);
@@ -499,10 +504,16 @@ function WaitlistForm({ inverted = false }: { inverted?: boolean }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-[520px]" aria-label="Join the Sociol waitlist">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full max-w-[520px]"
+      aria-label="Join the Sociol waitlist"
+    >
       <div
-       className={`flex flex-col gap-3 rounded-[28px] p-2 sm:flex-row sm:rounded-full ${
-          inverted ? "bg-white/25" : "border border-[#E8E8E8] bg-white shadow-[0_12px_36px_rgba(26,26,26,0.08)]"
+        className={`flex flex-col gap-3 rounded-[28px] p-2 sm:flex-row sm:rounded-full ${
+          inverted
+            ? "bg-white/25"
+            : "border border-[#E8E8E8] bg-white shadow-[0_12px_36px_rgba(26,26,26,0.08)]"
         }`}
       >
         <label htmlFor={`waitlist-email-${inverted ? "final" : "hero"}`} className="sr-only">
@@ -532,7 +543,11 @@ function WaitlistForm({ inverted = false }: { inverted?: boolean }) {
         </button>
       </div>
       {message && (
-        <p id={messageId} role="status" className={`mt-2 text-[13px] ${inverted ? "text-[#1A1A1A]" : "text-red-600"}`}>
+        <p
+          id={messageId}
+          role="status"
+          className={`mt-2 text-[13px] ${inverted ? "text-[#1A1A1A]" : "text-red-600"}`}
+        >
           {message}
         </p>
       )}
@@ -590,18 +605,17 @@ function useParallax() {
 function JourneyBackdrop() {
   return (
     <div className="journey-ui" aria-hidden>
-      <div className="journey-track"><span /></div>
+      <div className="journey-track">
+        <span />
+      </div>
       <div className="journey-label">THE JOURNEY</div>
     </div>
   );
 }
 
 export default function App() {
-  const pathname = window.location.pathname.replace(/\/$/, "");
-  if (pathname === "/privacy-policy" || pathname === "/terms-of-service") {
-    return <LegalPage kind={pathname === "/privacy-policy" ? "privacy" : "terms"} />;
-  }
   useParallax();
+  useHideNavOnScroll();
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
@@ -610,401 +624,447 @@ export default function App() {
     };
   }, []);
 
+  const pathname = window.location.pathname.replace(/\/$/, "");
+  if (pathname === "/privacy-policy" || pathname === "/terms-of-service") {
+    return <LegalPage kind={pathname === "/privacy-policy" ? "privacy" : "terms"} />;
+  }
+
   return (
-    <div className="page-shell font-[Inter,-apple-system,BlinkMacSystemFont,sans-serif] bg-white text-[#1A1A1A]">
-      <JourneyBackdrop />
-      <Nav />
-
-      {/* HERO */}
-      <section className="hero-adventure relative overflow-hidden">
-        <div className="hero-sun parallax-layer" data-parallax-speed="0.09" aria-hidden />
-        <div className="hero-orbit parallax-layer" data-parallax-speed="-0.06" aria-hidden />
-        <div className="trail-dot trail-dot-one parallax-layer" data-parallax-speed="0.16" aria-hidden>01</div>
-        <div className="trail-dot trail-dot-two parallax-layer" data-parallax-speed="-0.11" aria-hidden>↗</div>
-        <div className="mx-auto flex min-h-[calc(100vh-72px)] max-w-[1280px] flex-col items-center gap-12 px-5 py-16 md:flex-row md:py-20">
-          <div className="w-full md:w-[55%]">
-            <Reveal>
-              <span className="inline-block rounded-full bg-[#FFF4DD] px-3.5 py-1.5 text-[13px] font-semibold uppercase tracking-[1px] text-[#D98F00]">
-                Coming soon · Join the early list
-              </span>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1
-                className="mt-6 font-extrabold leading-[1.05] text-[#1A1A1A]"
-                style={{ fontSize: "clamp(48px,8vw,80px)", letterSpacing: "-2px" }}
-              >
-                One Circle.
+    <div className="scrapbook-page">
+      <div className="scrap-nav-spacer" aria-hidden="true" />
+      <header className="scrap-nav">
+        <a href="#home" className="scrap-brand">
+          <img src={logoFullPng} alt="" />
+          <span>
+            sociol<span className="brand-dot">.</span>
+          </span>
+        </a>
+        <nav>
+          <a href="#how">How it works</a>
+          <a href="#circles">Your circle</a>
+          <a href="#faq">FAQs</a>
+          <a className="pill-cta" href="#waitlist">
+            Find your people ↗
+          </a>
+        </nav>
+      </header>
+      <main>
+        <section className="scrap-hero" id="home">
+          <div className="scrap-wrap hero-grid">
+            <div className="hero-copy">
+              <div className="eyebrow">
+                <span>✳</span> LESS SCROLLING. MORE BELONGING.
+              </div>
+              <h1>
+                Life’s better
                 <br />
-                Real
+                with <em>your kind</em>
                 <br />
-                <span className="text-[#6a25d0]">Friendships.</span>
+                of <span className="marker">people.</span>
               </h1>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="mt-6 max-w-[480px] text-[18px] leading-[1.6] text-[#6B6B6B]">
-                Stop collecting followers. Start building the one group that actually shows up.
+              <p>
+                Making new friends as an adult shouldn’t feel like a job interview. Sociol helps you
+                find your people and build the kind of friendships that fit real life.
               </p>
-            </Reveal>
-            <Reveal delay={240}>
-              <div className="mt-8">
-                <WaitlistForm />
+              <div className="hero-ctas">
+                <a className="pill-cta dark" href="#waitlist">
+                  Join the waitlist ↗
+                </a>
+                <a className="pill-cta outline" href="#how">
+                  How it works ↓
+                </a>
               </div>
-              {/* Launch CTA — restore when the apps are publicly available.
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="#download"
-                  className={`${cta} bg-[#1A1A1A] px-7 py-3.5 text-[15px] text-white`}
-                >
-                  <AppleIcon /> Download on iOS
-                </a>
-                <a
-                  href={ANDROID_DOWNLOAD_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${cta} bg-[#FFB60C] px-7 py-3.5 text-[15px] text-[#1A1A1A] hover:bg-[#E0A800]`}
-                >
-                  <PlayIcon /> Get it on Android
-                </a>
-              </div> */}
-              <p className="mt-5 text-[13px] text-[#AAAAAA]">
-                Be first to know when Sociol is ready in your city.
+              <small>For the curious, the quiet, the new-in-town, and everyone in between.</small>
+            </div>
+            <div className="hero-collage">
+              <div className="hero-blob" />
+              <div className="orbit" />
+              <img
+                className="people-photo"
+                src={sociolPeoplePng}
+                alt="A group of people connecting on Sociol"
+              />
+              {/* <img className="leaf leaf-right" src={foliageRightPng} alt="" />
+              <img className="leaf leaf-left" src={foliageLeftPng} alt="" /> */}
+              <div className="tape-note">
+                your people
+                <br />
+                are out there ✎
+              </div>
+              <div className="round-sticker">
+                GOOD
+                <br />
+                FRIENDS
+                <br />
+                TAKE TIME
+              </div>
+              <div className="heart-sticker">♥</div>
+            </div>
+          </div>
+        </section>
+        <div className="scrap-ticker">
+          <div>
+            Find your people ✳　 Friendship, at your pace ☺　 Small circles, real connection ↗　
+            Make room for new friends ✿　 Find your people ✳　 Friendship, at your pace ☺　
+          </div>
+        </div>
+        <section className="scrap-manifesto how-it-works" id="how">
+          <div className="scrap-wrap how-wrap">
+            <div className="how-heading">
+              <div className="scrap-label">HOW IT WORKS</div>
+              <h2>Finding your people has never been this intentional.</h2>
+            </div>
+            <div className="how-paper-grid">
+              <article className="how-paper paper-a"><span className="paper-number">01</span><span className="paper-doodle doodle-a">✳</span><h3>Build your profile</h3><p>Add photos, pick your interests, and describe your vibe. We keep it honest — no filters, no followers.</p><span className="pencil-scribble">a little bit of you ↗</span></article>
+              <article className="how-paper paper-b"><span className="paper-number">02</span><span className="paper-doodle doodle-b">⌁</span><h3>Create or join a Circle</h3><p>Start your own Circle and pick who joins, or find an existing Circle that fits. One Circle at a time. Always.</p><span className="pencil-scribble">find your kind of people</span></article>
+              <article className="how-paper paper-c"><span className="paper-number">03</span><span className="paper-doodle doodle-c">♥</span><h3>Meet in real life</h3><p>Your Circle unlocks group chat once it's full. Then you set a meetup goal and actually show up.</p><span className="pencil-scribble">and then, just show up ✎</span></article>
+            </div>
+            <div className="how-pencil-note">small steps.<br/>real friendship.</div>
+          </div>
+        </section>
+        <section className="scrap-product">
+          <div className="scrap-wrap product-wrap">
+            <div className="section-intro">
+              <div>
+                <div className="scrap-label">THE SOCIOL APP / A LITTLE LOOK INSIDE</div>
+                <h2>
+                  Small circles.
+                  <br />
+                  <em>Real life plans.</em>
+                </h2>
+              </div>
+              <p>
+                Why in the world did you think it's a good idea to spend the weekend alone at home doomscrolling?
               </p>
-            </Reveal>
-          </div>
-          <img
-            src={sociolPeoplePng}
-            alt="A group of people connecting on Sociol"
-            className="h-auto max-h-[calc(100vh-8rem)] w-full max-w-full object-contain md:w-[45%]"
-          />
-
-          {/* <div className="relative w-full md:w-[45%] parallax-layer" data-parallax-speed="0.035">
-            <div className="absolute -right-10 top-1/2 -z-10 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-[#FFF4DD] blur-[2px]" />
-            <div className="absolute right-20 top-10 -z-10 h-[180px] w-[180px] rounded-[60px] bg-[#FFB60C]/30" />
-            <Reveal delay={200}>
-              <div className="relative flex items-center justify-center" style={{ minHeight: 600 }}>
-                <div
-                  className="absolute right-2 top-6 origin-bottom"
-                  style={{ transform: "rotate(2deg)" }}
-                >
-                  <PhoneFrame className="scale-[0.85] md:scale-90">
-                    <ChatScreen />
-                  </PhoneFrame>
-                </div>
-                <div className="absolute left-0 top-0" style={{ transform: "rotate(-4deg)" }}>
-                  <PhoneFrame>
-                    <SwipeScreen />
-                  </PhoneFrame>
-                </div>
+            </div>
+            <div className="phone-showcase">
+              <div className="phone-caption caption-one">01 — Discover your people</div>
+              <div className="show-phone phone-left">
+                <PhoneFrame>
+                  <SwipeScreen />
+                </PhoneFrame>
               </div>
-            </Reveal>
-          </div> */}
-        </div>
-      </section>
-
-      {/* HOW IT WORKS */}
-      <section className="journey-section relative overflow-hidden bg-[#FAFAFA]">
-        <div className="contour contour-right parallax-layer" data-parallax-speed="-0.08" aria-hidden />
-        <div className="mx-auto max-w-[1280px] px-5 py-24">
-          <Reveal>
-            <div className="text-[13px] font-semibold uppercase tracking-[1px] text-[#FFB60C]">
-              How it works
+              <div className="show-phone phone-center">
+                <PhoneFrame>
+                  <ChatScreen />
+                </PhoneFrame>
+              </div>
+              <div className="show-phone phone-right">
+                <PhoneFrame>
+                  <CreateCircleScreen />
+                </PhoneFrame>
+              </div>
+              <div className="product-sticker">
+                A CIRCLE
+                <br />
+                OF YOUR OWN ✳
+              </div>
             </div>
-            <h2
-              className="mt-4 max-w-[640px] font-extrabold leading-[1.05] text-[#1A1A1A]"
-              style={{ fontSize: "clamp(34px,5vw,48px)", letterSpacing: "-1.5px" }}
-            >
-              Finding your people has never been this intentional.
-            </h2>
-          </Reveal>
-
-          <div className="relative mt-16 grid gap-12 md:grid-cols-3">
-            <div className="absolute left-[16%] right-[16%] top-8 -z-0 hidden border-t-2 border-dashed border-[#EFEFEF] md:block" />
-            {[
-              {
-                n: "01",
-                t: "Build your profile",
-                b: "Add photos, pick your interests, and describe your vibe. We keep it honest — no filters, no followers.",
-                I: UserPlus,
-              },
-              {
-                n: "02",
-                t: "Create or join a Circle",
-                b: "Start your own Circle and pick who joins, or find an existing Circle that fits. One Circle at a time. Always.",
-                I: SwapIcon,
-              },
-              {
-                n: "03",
-                t: "Meet in real life",
-                b: "Your Circle unlocks group chat once it's full. Then you set a meetup goal and actually show up.",
-                I: CalIcon,
-              },
-            ].map((s, i) => (
-              <Reveal key={s.n} delay={i * 100}>
-                <div className="relative z-10 text-left">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#FFF4DD]">
-                    <s.I />
-                  </div>
-                  <div className="mt-5 text-[13px] font-bold text-[#FFB60C]">{s.n}</div>
-                  <div className="mt-2 text-[20px] font-extrabold text-[#1A1A1A]">{s.t}</div>
-                  <p className="mt-3 text-[16px] leading-[1.6] text-[#6B6B6B]">{s.b}</p>
-                </div>
-              </Reveal>
-            ))}
           </div>
-        </div>
-      </section>
-
-      {/* FEATURE HIGHLIGHT */}
-      <section className="relative overflow-hidden">
-        <div className="contour contour-left parallax-layer" data-parallax-speed="0.075" aria-hidden />
-        <img
-          src={foliageRightPng}
-          alt=""
-          className="pointer-events-none absolute -right-[8%] -bottom-5 w-[clamp(220px,30vw,440px)] opacity-30"
-          aria-hidden="true"
-        />
-        <div className="relative z-10 mx-auto max-w-[1280px] space-y-24 px-5 py-24">
-          <FeatureRow
-            tag="For Circle Creators"
-            title="You choose who's in your Circle."
-            body="Set your Circle size (3 to 8 people), define your filters — age, location, interests, vibe — and swipe through people who actually match. No random strangers. No algorithm surprises."
-            bullets={[
-              "Set age range and location radius",
-              "Filter by shared interests and personality traits",
-              "Swipe right to invite, left to skip",
-              "Mutual match required to join",
-            ]}
-            phone={<CreateCircleScreen />}
-            reverse={false}
-          />
-          <FeatureRow
-            tag="For Circle Joiners"
-            title="Find a Circle that's already forming."
-            body="Browse Circles near you, see who's already in them, and swipe to request a spot. The host reviews your profile and lets you in. No ghosting, no awkward DMs."
-            bullets={[
-              "Browse Circles by distance and vibe",
-              "See member avatars before you join",
-              "Host approves — so everyone actually wants you there",
-              "Get notified the moment you're accepted",
-            ]}
-            phone={<CircleCardScreen />}
-            reverse
-          />
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="story-section relative overflow-hidden bg-[#FFF4DD]">
-        <div className="story-compass parallax-layer" data-parallax-speed="0.12" aria-hidden>✦</div>
-        <div className="mx-auto max-w-[1280px] px-5 py-24">
-          <Reveal>
-            <div className="text-[13px] font-semibold uppercase tracking-[1px] text-[#D98F00]">
-              Real Circles, real stories
+        </section>
+        <section className="scrap-section feature-details">
+          <div className="scrap-wrap">
+            <div className="section-intro">
+              <div>
+                <div className="scrap-label">MADE FOR THE WAY FRIENDSHIP HAPPENS</div>
+                <h2>
+                  Thoughtful by
+                  <br />
+                  <em>design.</em>
+                </h2>
+              </div>
+              {/* <p>
+                Enough structure to make meeting easier. Enough space for things to unfold
+                naturally.
+              </p> */}
             </div>
-            <h2
-              className="mt-4 max-w-[640px] font-extrabold leading-[1.05] text-[#1A1A1A]"
-              style={{ fontSize: "clamp(34px,5vw,48px)", letterSpacing: "-1.5px" }}
-            >
-              People are actually meeting.
-            </h2>
-          </Reveal>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[
-              {
-                q: "We met through Sociol three months ago. We've had six meetups since. I've never made friends this fast in my life.",
-                n: "Adaeze O.",
-                t: "Lagos, Nigeria",
-              },
-              {
-                q: "I was skeptical at first. But my Circle planned a hike two weeks after we matched. These are real friends now.",
-                n: "Kofi A.",
-                t: "Accra, Ghana",
-              },
-              {
-                q: "What I love is that everyone has to agree to be there. No fake profiles, no ghosting. We all actually showed up.",
-                n: "Chisom E.",
-                t: "Abuja, Nigeria",
-              },
-            ].map((c, i) => (
-              <Reveal key={c.n} delay={i * 80}>
-                <div className="h-full rounded-[24px] bg-white p-7">
-                  <div className="flex gap-1">
-                    {Array.from({ length: 5 }).map((_, k) => (
-                      <StarIcon key={k} />
-                    ))}
-                  </div>
-                  <p className="mt-4 text-[16px] italic leading-[1.6] text-[#1A1A1A]">"{c.q}"</p>
-                  <div className="mt-6 flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#FFB60C] to-[#D98F00]" />
-                    <div>
-                      <div className="text-[14px] font-bold text-[#1A1A1A]">{c.n}</div>
-                      <div className="text-[12px] text-[#6B6B6B]">{c.t}</div>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FEATURE GRID */}
-      <section className="relative overflow-hidden">
-        <div className="feature-glow parallax-layer" data-parallax-speed="-0.1" aria-hidden />
-        <div className="mx-auto max-w-[1280px] px-5 py-24">
-          <Reveal>
-            <div className="text-[13px] font-semibold uppercase tracking-[1px] text-[#FFB60C]">
-              Everything you need
+            <div className="detail-rows">
+              <FeatureRow
+                tag="FOR CIRCLE CREATORS"
+                title="You choose who's in your Circle."
+                body="Set your Circle size (3 to 8 people), define your filters — age, location, interests, vibe — and swipe through people who actually match. No random strangers. No algorithm surprises."
+                bullets={[
+                  "Set age range and location radius",
+                  "Filter by shared interests and personality traits",
+                  "Swipe right to invite, left to skip",
+                  "Mutual match required to join",
+                ]}
+                phone={<CreateCircleScreen />}
+                reverse={false}
+              />
+              <FeatureRow
+                tag="FOR CIRCLE JOINERS"
+                title="Find a Circle that's already forming."
+                body="Browse Circles near you, see who's already in them, and swipe to request a spot. The host reviews your profile and lets you in. No ghosting, no awkward DMs."
+                bullets={[
+                  "Browse Circles by distance and vibe",
+                  "See member avatars before you join",
+                  "Host approves — so everyone actually wants you there",
+                  "Get notified the moment you're accepted",
+                ]}
+                phone={<CircleCardScreen />}
+                reverse
+              />
             </div>
-            <h2
-              className="mt-4 max-w-[720px] font-extrabold leading-[1.05] text-[#1A1A1A]"
-              style={{ fontSize: "clamp(34px,5vw,48px)", letterSpacing: "-1.5px" }}
-            >
-              Built for real connection, not endless scrolling.
-            </h2>
-          </Reveal>
-          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                I: LockIcon,
-                t: "E2EE Group Calls",
-                b: "Every voice and video call in your Circle is end-to-end encrypted. What happens in your Circle, stays there.",
-              },
-              {
-                I: PhotoIcon,
-                t: "Rich Group Chat",
-                b: "Share photos, short videos, voice notes, and polls. Full media support built into every Circle chat.",
-              },
-              {
-                I: PinIcon,
-                t: "Find people near you",
-                b: "Sociol shows you people and Circles within your area. The closer they are, the easier it is to actually meet up.",
-              },
-              {
-                I: UsersIcon,
-                t: "One Circle at a Time",
-                b: "Intentionally limited. You can only be in one active Circle at a time. Depth over breadth, always.",
-              },
-              {
-                I: ClockIcon,
-                t: "Meetup Goals",
-                b: "Set a meetup goal when you create your Circle — coffee, study, gym, food, or outdoors. Real life, on purpose.",
-              },
-              {
-                I: ShieldIcon,
-                t: "Safe by Design",
-                b: "Moderation, reporting, and role-based admin tools built in. Hosts control who enters their Circle.",
-              },
-            ].map((f, i) => (
-              <Reveal key={f.t} delay={i * 60}>
-                <div className="h-full rounded-[20px] bg-[#FAFAFA] p-6">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FFF4DD]">
-                    <f.I />
-                  </div>
-                  <div className="mt-5 text-[18px] font-extrabold text-[#1A1A1A]">{f.t}</div>
-                  <p className="mt-2 text-[15px] leading-[1.6] text-[#6B6B6B]">{f.b}</p>
-                </div>
-              </Reveal>
-            ))}
           </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section id="waitlist" className="final-adventure relative overflow-hidden bg-[#FFB60C]">
-        <img
-          src={twoGirlsPng}
-          alt=""
-          className="cta-illustration parallax-layer"
-          data-parallax-speed="0.035"
-          aria-hidden="true"
-        />
-        <div className="cta-wave cta-wave-back" aria-hidden />
-        <div className="cta-wave cta-wave-front" aria-hidden />
-        <div className="relative z-10 mx-auto max-w-[1280px] px-5 py-20 text-center md:py-24">
-          <Reveal>
-            <h2
-              className="mx-auto max-w-[760px] font-extrabold leading-[1.05] text-[#1A1A1A]"
-              style={{ fontSize: "clamp(38px,5vw,56px)", letterSpacing: "-1.8px" }}
-            >
-              Be first in the Circle.
-            </h2>
-          </Reveal>
-          <Reveal delay={80}>
-            <p className="mx-auto mt-4 max-w-[560px] text-[16px] leading-[1.6] text-[#1A1A1A]/65">
-              Join the waitlist and we’ll email you as soon as Sociol is ready.
-            </p>
-          </Reveal>
-          <Reveal delay={160}>
-            <div className="mx-auto mt-7 flex max-w-[520px] justify-center">
+        </section>
+        <section className="scrap-section scrap-testimonials" id="how">
+          <div className="scrap-wrap">
+            <div className="section-intro">
+              <div><div className="scrap-label">REAL CIRCLES, REAL STORIES</div><h2>People are<br/><em>actually meeting.</em></h2></div>
+              {/* <p>Real connection starts with a first hello.</p> */}
+            </div>
+            <div className="scrap-testimonial-grid">
+              {[
+                { q: "We met through Sociol three months ago. We've had six meetups since. I've never made friends this fast in my life.", n: "Adaeze O.", t: "Lagos, Nigeria" },
+                { q: "I was skeptical at first. But my Circle planned a hike two weeks after we matched. These are real friends now.", n: "Kofi A.", t: "Accra, Ghana" },
+                { q: "What I love is that everyone has to agree to be there. No fake profiles, no ghosting. We all actually showed up.", n: "Chisom E.", t: "Abuja, Nigeria" },
+              ].map((item, i) => <article className={'scrap-testimonial testimonial-'+i} key={item.n}><div className="testimonial-stars">★★★★★</div><blockquote>“{item.q}”</blockquote><div className="testimonial-person"><span className="testimonial-avatar">{item.n[0]}</span><span><b>{item.n}</b><small>{item.t}</small></span></div></article>)}
+            </div>
+          </div>
+        </section>
+        <section className="scrap-section scrapbook-features" id="circles">
+          <div className="scrap-wrap">
+            <div className="section-intro">
+              <div>
+                <div className="scrap-label">EVERYTHING YOU NEED</div>
+                <h2>Built for real connection,<br/><em>not endless scrolling.</em></h2>
+              </div>
+            </div>
+            <div className="scrap-feature-grid">
+              {[
+                { I: LockIcon, t: "E2EE Group Calls", b: "Every voice and video call in your Circle is end-to-end encrypted. What happens in your Circle, stays there." },
+                { I: PhotoIcon, t: "Rich Group Chat", b: "Share photos, short videos, voice notes, and polls. Full media support built into every Circle chat." },
+                { I: PinIcon, t: "Find people near you", b: "Sociol shows you people and Circles within your area. The closer they are, the easier it is to actually meet up." },
+                { I: UsersIcon, t: "One Circle at a Time", b: "Intentionally limited. You can only be in one active Circle at a time. Depth over breadth, always." },
+                { I: ClockIcon, t: "Meetup Goals", b: "Set a meetup goal when you create your Circle — coffee, study, gym, food, or outdoors. Real life, on purpose." },
+                { I: ShieldIcon, t: "Safe by Design", b: "Moderation, reporting, and role-based admin tools built in. Hosts control who enters their Circle." },
+              ].map(({ I, t, b }, i) => <article className={'scrap-feature-card feature-color-'+i} key={t}><div className="scrap-feature-icon"><I /></div><h3>{t}</h3><p>{b}</p></article>)}
+            </div>
+          </div>
+        </section>
+        <section className="scrap-quote">
+          <div className="scrap-wrap quote-inner">
+            <span>“</span>
+            <blockquote>Friendship doesn’t have to be loud to be life-changing.</blockquote>
+            <div className="scrap-label">A LITTLE REMINDER FROM SOCIOL</div>
+          </div>
+        </section>
+        <section className="scrap-section faq-section" id="faq">
+          <div className="scrap-wrap faq-grid">
+            <div>
+              {/* <div className="scrap-label">04 / GOOD QUESTIONS</div> */}
+              <h2>
+                Before you
+                <br />
+                <em>say hello.</em>
+              </h2>
+              <p>A few things you might be wondering about finding friends with Sociol.</p>
+            </div>
+            <div className="faq-list">
+              <details open>
+                <summary>What is Sociol?</summary>
+                <p>
+                  Sociol is a social connection app designed to help people discover compatible
+                  friends and build smaller, more meaningful circles.
+                </p>
+              </details>
+              <details>
+                <summary>Is this a dating app?</summary>
+                <p>
+                  Sociol is focused on friendship and community, not romantic matching. The goal is
+                  to help you find people you can connect with in everyday life.
+                </p>
+              </details>
+              <details>
+                <summary>What if I’m introverted or a little shy?</summary>
+                <p>
+                  You don’t need to be the loudest person in the room. Take your time, start with
+                  shared interests, and connect in a way that feels comfortable to you.
+                </p>
+              </details>
+              <details>
+                <summary>How do I get started?</summary>
+                <p>
+                  Join the early list below and we’ll let you know when Sociol is ready in your
+                  city.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+        <section id="waitlist" className="scrap-final">
+          {/* <img className="final-leaf" src={foliageLeftPng} alt="" /> */}
+          <div className="scrap-wrap final-inner">
+            <div>
+              {/* <div className="scrap-label">05 / YOUR PEOPLE ARE OUT THERE</div> */}
+              <h2>
+                Make space
+                <br />
+                for <em>good people.</em>
+              </h2>
+              <p>
+                Join the waitlist and we’ll email you as soon as Sociol is ready.
+              </p>
+              <br />
               <WaitlistForm inverted />
+              
             </div>
-            {/* Launch CTA — restore when the apps are publicly available.
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <a
-                href="#download"
-                className={`${cta} bg-[#1A1A1A] px-8 py-4 text-[16px] text-white`}
-              >
-                <AppleIcon /> Download on iOS
-              </a>
-              <a
-                href={ANDROID_DOWNLOAD_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${cta} bg-white px-8 py-4 text-[16px] text-[#1A1A1A]`}
-              >
-                  <PlayIcon /> Get it on Android
-                </a>
-            </div> */}
-            <p className="mt-4 text-[12px] text-[#1A1A1A]/50">
-              No spam. Just launch updates and early-access news.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <SiteFooter />
+            <div className="final-collage">
+              <img src={twoGirlsPng} alt="Two friends sharing a moment" />
+              <div className="final-note">
+                a little hello
+                <br />
+                can go a long way ♥
+              </div>
+            </div>
+          </div>
+          <footer className="scrap-footer scrap-wrap">
+            <a href="#home" className="scrap-brand">
+              <img src={logoPng} alt="" />
+              <span>sociol .</span>
+            </a>
+            {/* <span>Friendship, at your pace.</span> */}
+            <nav>
+              <a href="#how">How it works</a>
+              <a href="#faq">FAQs</a>
+              <a href="/privacy-policy">Privacy</a>
+              <a href="/terms-of-service">Terms</a>
+              <a href="mailto:privacy@sociol.app">Contact</a>
+            </nav>
+            <span>© 2026 Sociol</span>
+          </footer>
+        </section>
+      </main>
     </div>
   );
+}
+
+function useHideNavOnScroll(selector = ".scrap-nav", hideAfter = 100, threshold = 8) {
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>(selector);
+    if (!header) return;
+
+    let lastY = window.scrollY;
+    let ticking = false;
+    const update = () => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+      if (y <= hideAfter) header.classList.remove("header-hidden");
+      else if (Math.abs(delta) > threshold) header.classList.toggle("header-hidden", delta > 0);
+      if (Math.abs(delta) > threshold || y <= hideAfter) lastY = y;
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    };
+    header.classList.remove("header-hidden");
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [selector, hideAfter, threshold]);
 }
 
 function LegalPage({ kind }: { kind: "privacy" | "terms" }) {
   const isPrivacy = kind === "privacy";
   const markdown = isPrivacy ? privacyMarkdown : termsMarkdown;
   const title = isPrivacy ? "Privacy Policy" : "Terms of Service";
-  const sections = markdown.split(/^## /m).slice(1).map((part) => {
-    const [heading, ...body] = part.split("\n");
-    return { heading: heading.trim(), body: body.join("\n").trim() };
-  });
-  const intro = isPrivacy
-    ? "Good friendships start with trust."
-    : "Make room for real connection.";
+  const sections = markdown
+    .split(/^## /m)
+    .slice(1)
+    .map((part) => {
+      const [heading, ...body] = part.split("\n");
+      return { heading: heading.trim(), body: body.join("\n").trim() };
+    });
+  const intro = isPrivacy ? "Good friendships start with trust." : "Make room for real connection.";
   const summary = isPrivacy
     ? "This notice explains how information may be used when you create a profile, join a Circle, and make plans with people nearby."
     : "These terms cover your use of Sociol: a place to meet people in small Circles and make plans to spend time together offline.";
   return (
-    <div className="page-shell font-[Inter,-apple-system,BlinkMacSystemFont,sans-serif] bg-white text-[#1A1A1A]">
-      <Nav />
+    <div className="scrapbook-page legal-scrap-page">
+      <header className="scrap-nav">
+        <a href="/" className="scrap-brand">
+          <img src={logoFullPng} alt="" />
+          <span>
+            sociol<span className="brand-dot">.</span>
+          </span>
+        </a>
+        <nav>
+          <a href="/#how">How it works</a>
+          <a href="/#circles">Your circle</a>
+          <a className="pill-cta" href="/">
+            Back to Sociol ↗
+          </a>
+        </nav>
+      </header>
       <main>
-        <section className="legal-hero">
+        <section className="legal-hero scrap-legal-hero">
           <div className="legal-wrap">
-            <a className="legal-back" href="/">← &nbsp;Back to Sociol</a>
-            <div className="legal-kicker"><span />{isPrivacy ? "YOUR PRIVACY, IN PLAIN LANGUAGE" : "THE GROUND RULES FOR GETTING TOGETHER"}</div>
+            <a className="legal-back" href="/">
+              ← &nbsp;Back to Sociol
+            </a>
+            <div className="legal-kicker">
+              <span />
+              {isPrivacy
+                ? "YOUR PRIVACY, IN PLAIN LANGUAGE"
+                : "THE GROUND RULES FOR GETTING TOGETHER"}
+            </div>
             <div className="legal-headline-row">
               <h1>{intro}</h1>
-              <aside>{summary}<strong>SOCIOL / {title.toUpperCase()}</strong></aside>
+              <aside>
+                {summary}
+                <strong>SOCIOL / {title.toUpperCase()}</strong>
+              </aside>
             </div>
           </div>
         </section>
-        <section className="legal-content mx-auto max-w-[1280px] px-5">
-          <nav className="legal-toc" aria-label="On this page"><h2>ON THIS PAGE</h2>{sections.map((section, i) => <a key={section.heading} href={`#section-${i + 1}`}><b>{String(i + 1).padStart(2, "0")}</b><span>{section.heading}</span></a>)}</nav>
-          <article className="legal-article"><div className="legal-article-label"><span />{title.toUpperCase()}</div>
+        <section className="legal-content scrap-legal-content mx-auto max-w-[1280px] px-5">
+          <nav className="legal-toc" aria-label="On this page">
+            <h2>ON THIS PAGE</h2>
+            {sections.map((section, i) => (
+              <a key={section.heading} href={`#section-${i + 1}`}>
+                <b>{String(i + 1).padStart(2, "0")}</b>
+                <span>{section.heading}</span>
+              </a>
+            ))}
+          </nav>
+          <article className="legal-article">
+            <div className="legal-article-label">
+              <span />
+              {title.toUpperCase()}
+            </div>
             <div className="legal-meta">{markdown.match(/Last updated: .+/)?.[0]}</div>
-            {sections.map((section, i) => <section id={`section-${i + 1}`} className="legal-section" key={section.heading}><div className="legal-number">{String(i + 1).padStart(2, "0")}</div><div><h2>{section.heading}</h2>{section.body.split(/\n\s*\n/).map((paragraph, p) => paragraph.startsWith("- ") ? <ul key={p}>{paragraph.split("\n").map((line) => <li key={line}>{line.replace(/^- /, "")}</li>)}</ul> : <p key={p}>{paragraph.replace(/\*\*(.*?)\*\*/g, "$1")}</p>)}</div></section>)}
+            {sections.map((section, i) => (
+              <section id={`section-${i + 1}`} className="legal-section" key={section.heading}>
+                <div className="legal-number">{String(i + 1).padStart(2, "0")}</div>
+                <div>
+                  <h2>{section.heading}</h2>
+                  {section.body.split(/\n\s*\n/).map((paragraph, p) =>
+                    paragraph.startsWith("- ") ? (
+                      <ul key={p}>
+                        {paragraph.split("\n").map((line) => (
+                          <li key={line}>{line.replace(/^- /, "")}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p key={p}>{paragraph.replace(/\*\*(.*?)\*\*/g, "$1")}</p>
+                    ),
+                  )}
+                </div>
+              </section>
+            ))}
           </article>
         </section>
-        <section id="download" className="legal-cta"><div className="legal-wrap"><div><span>MORE THAN A SCROLL</span><h2>Your Circle is waiting.</h2></div><a href="/">Find your Circle ↗</a></div></section>
+        <section id="download" className="legal-cta scrap-legal-cta">
+          <div className="legal-wrap">
+            <div>
+              <span>MORE THAN A SCROLL</span>
+              <h2>Your Circle is waiting.</h2>
+            </div>
+            <a href="/">Find your Circle ↗</a>
+          </div>
+        </section>
       </main>
       <SiteFooter />
     </div>
@@ -1013,16 +1073,28 @@ function LegalPage({ kind }: { kind: "privacy" | "terms" }) {
 
 function SiteFooter() {
   return (
-    <footer className="border-t border-[#EFEFEF] bg-white">
-        <div className="mx-auto flex max-w-[1120px] flex-col items-center justify-between gap-4 px-5 py-5 md:flex-row">
+    <footer className="scrap-legal-footer">
+      <div className="mx-auto flex max-w-[1120px] flex-col items-center justify-between gap-4 px-5 py-5 md:flex-row">
         <div className="flex items-center gap-3 text-[12px] text-[#AAAAAA]">
-          <a href="/" className="font-extrabold text-[#1A1A1A] hover:underline" aria-label="Sociol home">sociol</a>
+          <a
+            href="/"
+            className="font-extrabold text-[#1A1A1A] hover:underline"
+            aria-label="Sociol home"
+          >
+            sociol
+          </a>
           <span>© 2026 Sociol. All rights reserved.</span>
         </div>
         <div className="flex gap-6 text-[12px] text-[#6B6B6B]">
-          <a href="/privacy-policy" className="hover:underline">Privacy Policy</a>
-          <a href="/terms-of-service" className="hover:underline">Terms of Service</a>
-          <a href="mailto:privacy@sociol.app" className="hover:underline">Contact</a>
+          <a href="/privacy-policy" className="hover:underline">
+            Privacy Policy
+          </a>
+          <a href="/terms-of-service" className="hover:underline">
+            Terms of Service
+          </a>
+          <a href="mailto:privacy@sociol.app" className="hover:underline">
+            Contact
+          </a>
         </div>
       </div>
     </footer>
@@ -1046,7 +1118,7 @@ function FeatureRow({
 }) {
   return (
     <div
-      className={`grid items-center gap-12 md:grid-cols-2 ${reverse ? "md:[&>div:first-child]:order-2" : ""}`}
+      className={`feature-row grid items-center gap-12 md:grid-cols-2 ${reverse ? "md:[&>div:first-child]:order-2" : ""}`}
     >
       <Reveal>
         <div>
@@ -1097,7 +1169,11 @@ function Nav() {
       style={{ borderBottomColor: "transparent", transition: "border-color 200ms ease" }}
     >
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5">
-        <a href="/" aria-label="Sociol home" className="inline-flex items-center text-inherit no-underline">
+        <a
+          href="/"
+          aria-label="Sociol home"
+          className="inline-flex items-center text-inherit no-underline"
+        >
           <Logo />
         </a>
         {/* Launch CTA — restore when the apps are publicly available.
