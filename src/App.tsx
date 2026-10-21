@@ -702,10 +702,13 @@ export default function App() {
             </div>
           </div>
         </section>
-        <div className="scrap-ticker">
-          <div>
-            Find your people ✳　 Friendship, at your pace ☺　 Small circles, real connection ↗　
-            Make room for new friends ✿　 Find your people ✳　 Friendship, at your pace ☺　
+        <div className="scrap-ticker" aria-label="Find your people. Friendship at your pace. Small circles, real connection. Make room for new friends.">
+          <div className="ticker-track" aria-hidden="true">
+            <div className="ticker-group">
+              <span>Find your people ✳</span><span>Friendship, at your pace ☺</span><span>Small circles, real connection ↗</span><span>Make room for new friends ✿</span>
+              <span>Find your people ✳</span><span>Friendship, at your pace ☺</span><span>Small circles, real connection ↗</span><span>Make room for new friends ✿</span>
+              <span>Find your people ✳</span><span>Friendship, at your pace ☺</span><span>Small circles, real connection ↗</span><span>Make room for new friends ✿</span>
+            </div>
           </div>
         </div>
         <section className="scrap-manifesto how-it-works" id="how">

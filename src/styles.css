@@ -1011,14 +1011,17 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.scrap-ticker div {
+.scrap-ticker .ticker-track {
   width: max-content;
-  animation: scrap-marquee 34s linear infinite;
+  animation: scrap-marquee 48s linear infinite;
 }
+.scrap-ticker .ticker-group {
+  display: block;
+}
+.scrap-ticker .ticker-group span { margin-right: 3rem; }
 @keyframes scrap-marquee {
-  to {
-    transform: translateX(-35%);
-  }
+  from { transform: translateX(100vw); }
+  to { transform: translateX(-100%); }
 }
 .scrap-section {
   padding: 84px 0;
@@ -1480,7 +1483,7 @@ body {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .scrap-ticker div {
+  .scrap-ticker .ticker-track {
     animation: none;
   }
   .pill-cta {
