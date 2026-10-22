@@ -9,6 +9,7 @@ import foliageLeftPng from "../assets/foliage-left.png";
 import logoFullPng from "../assets/logo.png";
 import termsMarkdown from "./legal/terms-of-use.md?raw";
 import privacyMarkdown from "./legal/privacy-policy.md?raw";
+import { PencilDoodle } from "./Pencil";
 
 /* ---------- Links ---------- */
 const ANDROID_DOWNLOAD_URL =
@@ -720,8 +721,9 @@ export default function App() {
             <div className="how-paper-grid">
               <article className="how-paper paper-a"><span className="paper-number">01</span><span className="paper-doodle doodle-a">✳</span><h3>Build your profile</h3><p>Add photos, pick your interests, and describe your vibe. We keep it honest — no filters, no followers.</p><span className="pencil-scribble">a little bit of you ↗</span></article>
               <article className="how-paper paper-b"><span className="paper-number">02</span><span className="paper-doodle doodle-b">⌁</span><h3>Create or join a Circle</h3><p>Start your own Circle and pick who joins, or find an existing Circle that fits. One Circle at a time. Always.</p><span className="pencil-scribble">find your kind of people</span></article>
-              <article className="how-paper paper-c"><span className="paper-number">03</span><span className="paper-doodle doodle-c">♥</span><h3>Meet in real life</h3><p>Your Circle unlocks group chat once it's full. Then you set a meetup goal and actually show up.</p><span className="pencil-scribble">and then, just show up ✎</span></article>
+              <article className="how-paper paper-c"><span className="paper-number">03</span><span className="paper-doodle doodle-c">♥</span><h3>Meet in real life</h3><p>Your Circle unlocks group chat once it's full. Then you set a meetup goal and actually show up.</p><span className="pencil-scribble">and then, just show up</span></article>
             </div>
+            <PencilDoodle className="how-pencil" />
             <div className="how-pencil-note">small steps.<br/>real friendship.</div>
           </div>
         </section>

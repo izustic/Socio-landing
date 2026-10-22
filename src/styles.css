@@ -1970,6 +1970,16 @@ body {
   align-items: center;
 }
 .how-paper {
+   --fold: 34px;
+  /* cut the bottom-right corner diagonally; the polygon overshoots the box
+     by 60px elsewhere so the tape (::before) and box-shadow aren't clipped */
+  clip-path: polygon(
+    -60px -60px,
+    calc(100% + 60px) -60px,
+    calc(100% + 60px) calc(100% - var(--fold) - 60px),
+    calc(100% - var(--fold) - 60px) calc(100% + 60px),
+    -60px calc(100% + 60px)
+  );
   min-height: 300px;
   padding: 28px 26px 30px;
   position: relative;
@@ -1993,14 +2003,28 @@ body {
 .how-paper::after {
   content: "";
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 30px;
-  height: 30px;
-  background: linear-gradient(135deg, #e8e1d5 0 49%, #fffdf7 51%);
-  border-left: 1px solid #383830;
+  right: -1.5px; /* sit on the border edge, not inside it */
+  bottom: -1.5px;
+  width: var(--fold);
+  height: var(--fold);
+  background:
+    /* crease line along the diagonal */
+    linear-gradient(
+      135deg,
+      transparent calc(50% - 1.5px),
+      #383830 calc(50% - 1.5px) 50%,
+      transparent 50%
+    ),
+    /* flap shading: darker toward the crease */
+    linear-gradient(
+      135deg,
+      rgba(36, 37, 31, 0.04) 0%,
+      rgba(36, 37, 31, 0.2) 50%,
+      transparent 50%
+    );
   border-top: 1px solid #383830;
-  filter: drop-shadow(-2px -2px 1px #24251f17);
+  border-left: 1px solid #383830;
+  filter: none;
 }
 .paper-a {
   transform: rotate(-3.1deg);
@@ -2075,6 +2099,15 @@ body {
   color: var(--orange);
   transform: rotate(-25deg);
 }
+.how-pencil {
+  position: absolute;
+  right: 2%;
+  bottom: 20px;
+  width: clamp(64px, 8vw, 100px); 
+  height: auto; aspect-ratio: 1;
+  pointer-events: none;
+  z-index: 2;
+}
 @media (max-width: 760px) {
   .how-it-works {
     padding: 62px 0 80px;
@@ -2088,6 +2121,7 @@ body {
     gap: 25px;
     padding-inline: 8px;
   }
+  .how-pencil { right: 0; bottom: -16px; }
   .how-paper {
     min-height: 240px;
   }
