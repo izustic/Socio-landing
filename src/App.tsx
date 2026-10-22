@@ -614,6 +614,70 @@ function JourneyBackdrop() {
   );
 }
 
+const poemStanzas = [
+  "Go placidly amid the noise and the haste,",
+  "and remember what peace there may be in silence.",
+  "As far as possible, without surrender,",
+  "be on good terms with all persons.",
+  "Speak your truth quietly and clearly;",
+  "and listen to others, even to the dull and the ignorant;",
+  "they too have their story.",
+  "Avoid loud and aggressive persons;",
+  "they are vexatious to the spirit.",
+  "If you compare yourself with others, you may become vain or bitter,",
+  "for always there will be greater and lesser persons than yourself.",
+  "Enjoy your achievements as well as your plans.",
+  "Keep interested in your own career, however humble;",
+  "it is a real possession in the changing fortunes of time.",
+  "Exercise caution in your business affairs,",
+  "for the world is full of trickery.",
+  "But let this not blind you to what virtue there is;",
+  "many persons strive for high ideals,",
+  "and everywhere life is full of heroism.",
+  "Be yourself.",
+  "Especially do not feign affection.",
+  "Neither be cynical about love;",
+  "for in the face of all aridity and disenchantment,",
+  "it is as perennial as the grass.",
+  "Take kindly the counsel of the years,",
+  "gracefully surrendering the things of youth.",
+  "Nurture strength of spirit to shield you in sudden misfortune.",
+  "But do not distress yourself with dark imaginings.",
+  "Many fears are born of fatigue and loneliness.",
+  "Beyond a wholesome discipline, be gentle with yourself.",
+  "You are a child of the universe",
+  "no less than the trees and the stars; you have a right to be here.",
+  "And whether or not it is clear to you,",
+  "no doubt the universe is unfolding as it should.",
+  "Therefore be at peace with God, whatever you conceive Him to be.",
+  "And whatever your labors and aspirations,",
+  "in the noisy confusion of life, keep peace in your soul.",
+  "With all its sham, drudgery and broken dreams,",
+  "it is still a beautiful world.",
+  "Be cheerful.",
+  "Strive to be happy.",
+];
+
+function PoemRotator() {
+  const [stanzaIndex, setStanzaIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setStanzaIndex((index) => (index + 1) % poemStanzas.length);
+    }, 4000);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  return (
+    <blockquote aria-live="polite" aria-atomic="true">
+      <span className="quote-poem-line" key={stanzaIndex}>
+        {poemStanzas[stanzaIndex]}
+      </span>
+    </blockquote>
+  );
+}
+
 export default function App() {
   useParallax();
   useHideNavOnScroll();
@@ -703,13 +767,27 @@ export default function App() {
             </div>
           </div>
         </section>
-        <div className="scrap-ticker" aria-label="Find your people. Friendship at your pace. Small circles, real connection. Make room for new friends.">
+        <div
+          className="scrap-ticker"
+          aria-label="Find your people. Friendship at your pace. Small circles, real connection. Make room for new friends."
+        >
           <div className="ticker-track" aria-hidden="true">
-            {[0, 1].map((copy) => <div className="ticker-group" key={copy} aria-hidden="true">
-              <span>Find your people ✳</span><span>Friendship, at your pace ☺</span><span>Small circles, real connection ↗</span><span>Make room for new friends ✿</span>
-              <span>Find your people ✳</span><span>Friendship, at your pace ☺</span><span>Small circles, real connection ↗</span><span>Make room for new friends ✿</span>
-              <span>Find your people ✳</span><span>Friendship, at your pace ☺</span><span>Small circles, real connection ↗</span><span>Make room for new friends ✿</span>
-            </div>)}
+            {[0, 1].map((copy) => (
+              <div className="ticker-group" key={copy} aria-hidden="true">
+                <span>Find your people ✳</span>
+                <span>Friendship, at your pace ☺</span>
+                <span>Small circles, real connection ↗</span>
+                <span>Make room for new friends ✿</span>
+                <span>Find your people ✳</span>
+                <span>Friendship, at your pace ☺</span>
+                <span>Small circles, real connection ↗</span>
+                <span>Make room for new friends ✿</span>
+                <span>Find your people ✳</span>
+                <span>Friendship, at your pace ☺</span>
+                <span>Small circles, real connection ↗</span>
+                <span>Make room for new friends ✿</span>
+              </div>
+            ))}
           </div>
         </div>
         <section className="scrap-manifesto how-it-works" id="how">
@@ -719,9 +797,36 @@ export default function App() {
               <h2>Finding your people has never been this intentional.</h2>
             </div>
             <div className="how-paper-grid">
-              <article className="how-paper paper-a"><span className="paper-number">01</span><span className="paper-doodle doodle-a">✳</span><h3>Build your profile</h3><p>Add photos, pick your interests, and describe your vibe. We keep it honest — no filters, no followers.</p><span className="pencil-scribble">a little bit of you ↗</span></article>
-              <article className="how-paper paper-b"><span className="paper-number">02</span><span className="paper-doodle doodle-b">⌁</span><h3>Create or join a Circle</h3><p>Start your own Circle and pick who joins, or find an existing Circle that fits. One Circle at a time. Always.</p><span className="pencil-scribble">find your kind of people</span></article>
-              <article className="how-paper paper-c"><span className="paper-number">03</span><span className="paper-doodle doodle-c">♥</span><h3>Meet in real life</h3><p>Your Circle unlocks group chat once it's full. Then you set a meetup goal and actually show up.</p><span className="pencil-scribble">and then, just show up</span></article>
+              <article className="how-paper paper-a">
+                <span className="paper-number">01</span>
+                <span className="paper-doodle doodle-a">✳</span>
+                <h3>Build your profile</h3>
+                <p>
+                  Add photos, pick your interests, and describe your vibe. We keep it honest — no
+                  filters, no followers.
+                </p>
+                <span className="pencil-scribble">a little bit of you ↗</span>
+              </article>
+              <article className="how-paper paper-b">
+                <span className="paper-number">02</span>
+                <span className="paper-doodle doodle-b">⌁</span>
+                <h3>Create or join a Circle</h3>
+                <p>
+                  Start your own Circle and pick who joins, or find an existing Circle that fits.
+                  One Circle at a time. Always.
+                </p>
+                <span className="pencil-scribble">find your kind of people</span>
+              </article>
+              <article className="how-paper paper-c">
+                <span className="paper-number">03</span>
+                <span className="paper-doodle doodle-c">♥</span>
+                <h3>Meet in real life</h3>
+                <p>
+                  Your Circle unlocks group chat once it's full. Then you set a meetup goal and
+                  actually show up.
+                </p>
+                <span className="pencil-scribble">and then, just show up</span>
+              </article>
             </div>
             <PencilDoodle className="how-pencil" />
           </div>
@@ -738,7 +843,8 @@ export default function App() {
                 </h2>
               </div>
               <p>
-                Why in the world did you think it's a good idea to spend the weekend alone at home doomscrolling?
+                Why in the world did you think it's a good idea to spend the weekend alone at home
+                doomscrolling?
               </p>
             </div>
             <div className="phone-showcase">
@@ -815,15 +921,46 @@ export default function App() {
         <section className="scrap-section scrap-testimonials" id="how">
           <div className="scrap-wrap">
             <div className="section-intro">
-              <div><div className="scrap-label">REAL CIRCLES, REAL STORIES</div><h2>People are<br/><em>actually meeting.</em></h2></div>
+              <div>
+                <div className="scrap-label">REAL CIRCLES, REAL STORIES</div>
+                <h2>
+                  People are
+                  <br />
+                  <em>actually meeting.</em>
+                </h2>
+              </div>
               {/* <p>Real connection starts with a first hello.</p> */}
             </div>
             <div className="scrap-testimonial-grid">
               {[
-                { q: "We met through Sociol three months ago. We've had six meetups since. I've never made friends this fast in my life.", n: "Adaeze O.", t: "Lagos, Nigeria" },
-                { q: "I was skeptical at first. But my Circle planned a hike two weeks after we matched. These are real friends now.", n: "Kofi A.", t: "Accra, Ghana" },
-                { q: "What I love is that everyone has to agree to be there. No fake profiles, no ghosting. We all actually showed up.", n: "Chisom E.", t: "Abuja, Nigeria" },
-              ].map((item, i) => <article className={'scrap-testimonial testimonial-'+i} key={item.n}><div className="testimonial-stars">★★★★★</div><blockquote>“{item.q}”</blockquote><div className="testimonial-person"><span className="testimonial-avatar">{item.n[0]}</span><span><b>{item.n}</b><small>{item.t}</small></span></div></article>)}
+                {
+                  q: "We met through Sociol three months ago. We've had six meetups since. I've never made friends this fast in my life.",
+                  n: "Adaeze O.",
+                  t: "Lagos, Nigeria",
+                },
+                {
+                  q: "I was skeptical at first. But my Circle planned a hike two weeks after we matched. These are real friends now.",
+                  n: "Kofi A.",
+                  t: "Accra, Ghana",
+                },
+                {
+                  q: "What I love is that everyone has to agree to be there. No fake profiles, no ghosting. We all actually showed up.",
+                  n: "Chisom E.",
+                  t: "Abuja, Nigeria",
+                },
+              ].map((item, i) => (
+                <article className={"scrap-testimonial testimonial-" + i} key={item.n}>
+                  <div className="testimonial-stars">★★★★★</div>
+                  <blockquote>“{item.q}”</blockquote>
+                  <div className="testimonial-person">
+                    <span className="testimonial-avatar">{item.n[0]}</span>
+                    <span>
+                      <b>{item.n}</b>
+                      <small>{item.t}</small>
+                    </span>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -832,26 +969,62 @@ export default function App() {
             <div className="section-intro">
               <div>
                 <div className="scrap-label">EVERYTHING YOU NEED</div>
-                <h2>Built for real connection,<br/><em>not endless scrolling.</em></h2>
+                <h2>
+                  Built for real connection,
+                  <br />
+                  <em>not endless scrolling.</em>
+                </h2>
               </div>
             </div>
             <div className="scrap-feature-grid">
               {[
-                { I: LockIcon, t: "E2EE Group Calls", b: "Every voice and video call in your Circle is end-to-end encrypted. What happens in your Circle, stays there." },
-                { I: PhotoIcon, t: "Rich Group Chat", b: "Share photos, short videos, voice notes, and polls. Full media support built into every Circle chat." },
-                { I: PinIcon, t: "Find people near you", b: "Sociol shows you people and Circles within your area. The closer they are, the easier it is to actually meet up." },
-                { I: UsersIcon, t: "One Circle at a Time", b: "Intentionally limited. You can only be in one active Circle at a time. Depth over breadth, always." },
-                { I: ClockIcon, t: "Meetup Goals", b: "Set a meetup goal when you create your Circle — coffee, study, gym, food, or outdoors. Real life, on purpose." },
-                { I: ShieldIcon, t: "Safe by Design", b: "Moderation, reporting, and role-based admin tools built in. Hosts control who enters their Circle." },
-              ].map(({ I, t, b }, i) => <article className={'scrap-feature-card feature-color-'+i} key={t}><div className="scrap-feature-icon"><I /></div><h3>{t}</h3><p>{b}</p></article>)}
+                {
+                  I: LockIcon,
+                  t: "E2EE Group Calls",
+                  b: "Every voice and video call in your Circle is end-to-end encrypted. What happens in your Circle, stays there.",
+                },
+                {
+                  I: PhotoIcon,
+                  t: "Rich Group Chat",
+                  b: "Share photos, short videos, voice notes, and polls. Full media support built into every Circle chat.",
+                },
+                {
+                  I: PinIcon,
+                  t: "Find people near you",
+                  b: "Sociol shows you people and Circles within your area. The closer they are, the easier it is to actually meet up.",
+                },
+                {
+                  I: UsersIcon,
+                  t: "One Circle at a Time",
+                  b: "Intentionally limited. You can only be in one active Circle at a time. Depth over breadth, always.",
+                },
+                {
+                  I: ClockIcon,
+                  t: "Meetup Goals",
+                  b: "Set a meetup goal when you create your Circle — coffee, study, gym, food, or outdoors. Real life, on purpose.",
+                },
+                {
+                  I: ShieldIcon,
+                  t: "Safe by Design",
+                  b: "Moderation, reporting, and role-based admin tools built in. Hosts control who enters their Circle.",
+                },
+              ].map(({ I, t, b }, i) => (
+                <article className={"scrap-feature-card feature-color-" + i} key={t}>
+                  <div className="scrap-feature-icon">
+                    <I />
+                  </div>
+                  <h3>{t}</h3>
+                  <p>{b}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
         <section className="scrap-quote">
           <div className="scrap-wrap quote-inner">
             <span>“</span>
-            <blockquote>You are a child of the universe, no less than the trees and the stars; you have a right to be here</blockquote>
-            <div className="scrap-label">—— MAX EHRMAN</div>
+            <PoemRotator />
+            <div className="scrap-label">— MAX EHRMANN</div>
           </div>
         </section>
         <section className="scrap-section faq-section" id="faq">
@@ -907,12 +1080,9 @@ export default function App() {
                 <br />
                 for <em>good people.</em>
               </h2>
-              <p>
-                Join the waitlist and we’ll email you as soon as Sociol is ready.
-              </p>
+              <p>Join the waitlist and we’ll email you as soon as Sociol is ready.</p>
               <br />
               <WaitlistForm inverted />
-              
             </div>
             <div className="final-collage">
               <img src={twoGirlsPng} alt="Two friends sharing a moment" />
