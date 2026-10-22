@@ -850,8 +850,8 @@ export default function App() {
         <section className="scrap-quote">
           <div className="scrap-wrap quote-inner">
             <span>“</span>
-            <blockquote>Friendship doesn’t have to be loud to be life-changing.</blockquote>
-            <div className="scrap-label">A LITTLE REMINDER FROM SOCIOL</div>
+            <blockquote>You are a child of the universe, no less than the trees and the stars; you have a right to be here</blockquote>
+            <div className="scrap-label">—— MAX EHRMAN</div>
           </div>
         </section>
         <section className="scrap-section faq-section" id="faq">
