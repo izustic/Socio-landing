@@ -675,7 +675,7 @@ export default function App() {
                   How it works ↓
                 </a>
               </div>
-              <small>For the curious, the quiet, the new-in-town, and everyone in between.</small>
+              {/* <small>For the curious, the quiet, the new-in-town, and everyone in between.</small> */}
             </div>
             <div className="hero-collage">
               <div className="hero-blob" />
@@ -724,7 +724,6 @@ export default function App() {
               <article className="how-paper paper-c"><span className="paper-number">03</span><span className="paper-doodle doodle-c">♥</span><h3>Meet in real life</h3><p>Your Circle unlocks group chat once it's full. Then you set a meetup goal and actually show up.</p><span className="pencil-scribble">and then, just show up</span></article>
             </div>
             <PencilDoodle className="how-pencil" />
-            <div className="how-pencil-note">small steps.<br/>real friendship.</div>
           </div>
         </section>
         <section className="scrap-product">
