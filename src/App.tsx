@@ -10,6 +10,7 @@ import logoFullPng from "../assets/logo.png";
 import termsMarkdown from "./legal/terms-of-use.md?raw";
 import privacyMarkdown from "./legal/privacy-policy.md?raw";
 import { PencilDoodle } from "./Pencil";
+import DeleteAccountPage from "./DeleteAccountPage";
 
 /* ---------- Links ---------- */
 const ANDROID_DOWNLOAD_URL =
@@ -690,6 +691,9 @@ export default function App() {
   }, []);
 
   const pathname = window.location.pathname.replace(/\/$/, "");
+  if (pathname === "/delete-account") {
+    return <DeleteAccountPage footer={<SiteFooter />} />;
+  }
   if (pathname === "/privacy-policy" || pathname === "/terms-of-service") {
     return <LegalPage kind={pathname === "/privacy-policy" ? "privacy" : "terms"} />;
   }
@@ -1104,7 +1108,8 @@ export default function App() {
               <a href="#faq">FAQs</a>
               <a href="/privacy-policy">Privacy</a>
               <a href="/terms-of-service">Terms</a>
-              <a href="mailto:privacy@sociol.app">Contact</a>
+              <a href="/delete-account">Delete Account</a>
+              <a href="mailto:hello@sociol.net">Contact</a>
             </nav>
             <span>© 2026 Sociol</span>
           </footer>
@@ -1259,14 +1264,17 @@ function SiteFooter() {
           </a>
           <span>© 2026 Sociol. All rights reserved.</span>
         </div>
-        <div className="flex gap-6 text-[12px] text-[#6B6B6B]">
+        <div className="flex flex-wrap justify-center gap-6 text-[12px] text-[#6B6B6B]">
           <a href="/privacy-policy" className="hover:underline">
             Privacy Policy
           </a>
           <a href="/terms-of-service" className="hover:underline">
             Terms of Service
           </a>
-          <a href="mailto:privacy@sociol.app" className="hover:underline">
+          <a href="/delete-account" className="hover:underline">
+            Delete Account
+          </a>
+          <a href="mailto:hello@sociol.net" className="hover:underline">
             Contact
           </a>
         </div>

@@ -1,0 +1,46 @@
+.deletion-page { --deletion-accent: #ffdb78; }
+.deletion-page .deletion-hero { padding-block: 64px; }
+.deletion-page .legal-kicker { font-size: 12px; color: #55564e; }
+.deletion-page .legal-headline-row h1 { font-size: clamp(42px, 6vw, 76px); line-height: 1.04; }
+.deletion-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 64px; padding-block: 64px 80px; align-items: start; }
+.deletion-details section { padding-block: 28px; border-bottom: 1px dashed #c8c0b3; scroll-margin-top: 100px; }
+.deletion-details section:first-child { padding-top: 0; }
+.deletion-page h2 { font: 600 clamp(25px, 3vw, 32px)/1.15 "Space Grotesk", sans-serif; letter-spacing: -0.045em; margin-bottom: 18px; }
+.deletion-page p, .deletion-page li { font-size: 16px; line-height: 1.75; color: #55564e; }
+.deletion-page p + p { margin-top: 16px; }
+.deletion-details ol, .deletion-details ul { padding-left: 24px; margin-block: 18px; }
+.deletion-details ol { list-style: decimal; }
+.deletion-details ul { list-style: disc; }
+.deletion-details li { padding-left: 4px; margin-block: 12px; }
+.deletion-details a, .deletion-request a { text-decoration: underline; text-underline-offset: 3px; color: var(--ink); overflow-wrap: anywhere; }
+.deletion-eyebrow { display: block; margin-bottom: 18px; font: 12px "DM Mono", monospace; letter-spacing: .06em; }
+.deletion-form-card { background: var(--white); border: 1.5px solid var(--ink); box-shadow: 6px 7px 0 var(--ink); border-radius: 16px; padding: 28px; }
+.deletion-form-card > .deletion-eyebrow { display: inline-block; padding: 7px 10px; background: var(--deletion-accent); border: 1px solid var(--ink); border-radius: 5px; font-size: 11px; }
+.deletion-form-card form { margin-top: 24px; }
+.deletion-form-card fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.deletion-form-card label { display: block; font-size: 15px; font-weight: 700; margin-block: 20px 8px; }
+.deletion-form-card label span { font-weight: 400; }
+.deletion-form-card input, .deletion-form-card textarea { display: block; width: 100%; min-width: 0; font: inherit; font-size: 16px; background: var(--paper); border: 1px solid #77766c; border-radius: 8px; padding: 12px; color: var(--ink); }
+.deletion-form-card textarea { resize: vertical; }
+.deletion-form-card .deletion-help { font-size: 14px; line-height: 1.6; margin-block: 12px; }
+.deletion-page .deletion-notice { padding: 16px; margin-top: 20px; background: #edf2dc; border-left: 3px solid #53652a; font-size: 15px; line-height: 1.6; }
+.deletion-submit { background: var(--deletion-accent); width: 100%; margin-top: 12px; font-size: 15px; min-height: 48px; cursor: pointer; }
+.deletion-submit:disabled { opacity: .6; box-shadow: none; cursor: not-allowed; }
+.deletion-restart { display: block; margin: 20px auto 0; text-decoration: underline; font-size: 14px; cursor: pointer; min-height: 44px; }
+.deletion-page .deletion-error { color: #922a20; background: #fff0ec; padding: 12px; margin-top: 18px; font-size: 15px; }
+.deletion-page .deletion-contact { text-align: center; margin-top: 24px; font-size: 14px; }
+.deletion-challenge { margin-top: 20px; min-height: 65px; }
+.deletion-page :focus-visible { outline: 3px solid #2264aa; outline-offset: 4px; }
+.deletion-skip { position: fixed; left: 16px; top: -100px; z-index: 100; background: var(--ink); color: white; padding: 12px 18px; }
+.deletion-skip:focus { top: 12px; }
+@media (max-width: 900px) {
+  .deletion-layout { grid-template-columns: 1fr; gap: 42px; max-width: 680px; padding-block: 40px; }
+  .deletion-request { grid-row: 1; }
+  .deletion-page .legal-headline-row { grid-template-columns: 1fr; gap: 24px; }
+  .deletion-page .legal-headline-row aside { max-width: 560px; }
+}
+@media (max-width: 480px) {
+  .deletion-page .deletion-hero { padding-block: 36px; }
+  .deletion-form-card { padding: 20px; }
+  .deletion-page .legal-headline-row h1 { font-size: 42px; }
+}

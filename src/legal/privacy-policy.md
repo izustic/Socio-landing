@@ -2,7 +2,7 @@
 
 Last updated: July 6, 2026
 
-Contact: privacy@sociol.app
+Contact: hello@sociol.net
 
 This Privacy Policy explains how Sociol collects, uses, shares, retains, and protects information when you use our mobile app, websites, and related services.
 
@@ -66,7 +66,7 @@ We use sensitive information only to provide requested features, keep the app sa
 
 We keep information for as long as needed to provide Sociol, maintain security, resolve disputes, enforce our Terms, comply with law, and support legitimate business needs.
 
-You can request account deletion in the app. When an account is deleted, we delete or de-identify personal information associated with the account unless retention is necessary for legal, fraud prevention, security, dispute resolution, or safety reasons.
+You can request account deletion in the app, at https://sociol.net/delete-account, or by contacting hello@sociol.net. Website requests require account ownership verification before deletion. We use request details to verify ownership, process your request, and maintain necessary records of its resolution. The online form uses Cloudflare Turnstile for abuse protection and Supabase for email verification and restricted request storage when enabled. When an account is deleted, we delete or de-identify personal information associated with the account unless retention is necessary for legal, fraud prevention, security, dispute resolution, or safety reasons.
 
 Some content may remain visible where technically or legally necessary, such as moderation logs, safety records, transaction records, or messages retained for other Circle members, but we will minimize retained personal information where practical.
 
@@ -107,4 +107,4 @@ No system is perfectly secure. If you believe your account or information has be
 
 We may update this Privacy Policy as Sociol changes. If changes are material, we will provide notice in the app or by another reasonable method.
 
-Contact us at privacy@sociol.app for privacy questions or requests.
+Contact us at hello@sociol.net for privacy questions or requests.

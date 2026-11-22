@@ -2,7 +2,7 @@
 
 Last updated: July 6, 2026
 
-Contact: privacy@sociol.app
+Contact: hello@sociol.net
 
 This Data & Compliance notice summarizes Sociol's privacy, safety, and data governance practices in plain language. It supplements the Privacy Policy and Terms of Use.
 
@@ -43,7 +43,7 @@ Users can exercise many rights directly in the app.
 - Deletion: Settings > Delete account.
 - Visibility controls: Privacy & safety toggles.
 - Location/notification/media permissions: device settings and in-app settings where available.
-- Manual privacy requests: privacy@sociol.app.
+- Manual privacy requests: hello@sociol.net.
 
 ## Retention Policy
 

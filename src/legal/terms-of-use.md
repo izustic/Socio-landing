@@ -2,7 +2,7 @@
 
 Last updated: July 6, 2026
 
-Contact: privacy@sociol.app
+Contact: hello@sociol.net
 
 These Terms of Use govern your access to and use of Sociol. By creating an account, signing in, tapping Continue, or using Sociol, you agree to these Terms and acknowledge our Privacy Policy.
 
@@ -80,4 +80,4 @@ Some jurisdictions do not allow certain limitations, so parts of this section ma
 
 We may update these Terms as Sociol evolves. If changes are material, we will provide reasonable notice.
 
-Contact us at privacy@sociol.app with questions.
+Contact us at hello@sociol.net with questions.
