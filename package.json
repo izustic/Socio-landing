@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/deletion-page.mjs",
-    "build:dev": "vite build --mode development && node scripts/deletion-page.mjs",
+    "build": "vite build && node scripts/deletion-page.mjs && node scripts/child-safety-page.mjs",
+    "build:dev": "vite build --mode development && node scripts/deletion-page.mjs && node scripts/child-safety-page.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",

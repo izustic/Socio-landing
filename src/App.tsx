@@ -9,6 +9,7 @@ import foliageLeftPng from "../assets/foliage-left.png";
 import logoFullPng from "../assets/logo.png";
 import termsMarkdown from "./legal/terms-of-use.md?raw";
 import privacyMarkdown from "./legal/privacy-policy.md?raw";
+import childSafetyMarkdown from "./legal/child-safety.md?raw";
 import { PencilDoodle } from "./Pencil";
 import DeleteAccountPage from "./DeleteAccountPage";
 
@@ -691,6 +692,9 @@ export default function App() {
   }, []);
 
   const pathname = window.location.pathname.replace(/\/$/, "");
+  if (pathname === "/child-safety") {
+    return <LegalPage kind="child-safety" />;
+  }
   if (pathname === "/delete-account") {
     return <DeleteAccountPage footer={<SiteFooter />} />;
   }
@@ -1109,6 +1113,7 @@ export default function App() {
               <a href="/privacy-policy">Privacy</a>
               <a href="/terms-of-service">Terms</a>
               <a href="/delete-account">Delete Account</a>
+              <a href="/child-safety">Child Safety</a>
               <a href="mailto:hello@sociol.net">Contact</a>
             </nav>
             <span>© 2026 Sociol</span>
@@ -1145,10 +1150,14 @@ function useHideNavOnScroll(selector = ".scrap-nav", hideAfter = 100, threshold 
   }, [selector, hideAfter, threshold]);
 }
 
-function LegalPage({ kind }: { kind: "privacy" | "terms" }) {
+export function LegalPage({ kind }: { kind: "privacy" | "terms" | "child-safety" }) {
+  const isChildSafety = kind === "child-safety";
   const isPrivacy = kind === "privacy";
-  const markdown = isPrivacy ? privacyMarkdown : termsMarkdown;
-  const title = isPrivacy ? "Privacy Policy" : "Terms of Service";
+  const markdown = isChildSafety ? childSafetyMarkdown : isPrivacy ? privacyMarkdown : termsMarkdown;
+  const title = isChildSafety ? "Child Safety Standards" : isPrivacy ? "Privacy Policy" : "Terms of Service";
+  useEffect(() => {
+    if (isChildSafety) document.title = "Sociol Child Safety Standards | Sociol";
+  }, [isChildSafety]);
   const sections = markdown
     .split(/^## /m)
     .slice(1)
@@ -1156,8 +1165,10 @@ function LegalPage({ kind }: { kind: "privacy" | "terms" }) {
       const [heading, ...body] = part.split("\n");
       return { heading: heading.trim(), body: body.join("\n").trim() };
     });
-  const intro = isPrivacy ? "Good friendships start with trust." : "Make room for real connection.";
-  const summary = isPrivacy
+  const intro = isChildSafety ? "Sociol Child Safety Standards" : isPrivacy ? "Good friendships start with trust." : "Make room for real connection.";
+  const summary = isChildSafety
+    ? "Our standards against child sexual abuse and exploitation, how to report concerns, and the action we take to help keep people safe."
+    : isPrivacy
     ? "This notice explains how information may be used when you create a profile, join a Circle, and make plans with people nearby."
     : "These terms cover your use of Sociol: a place to meet people in small Circles and make plans to spend time together offline.";
   return (
@@ -1185,7 +1196,7 @@ function LegalPage({ kind }: { kind: "privacy" | "terms" }) {
             </a>
             <div className="legal-kicker">
               <span />
-              {isPrivacy
+              {isChildSafety ? "SAFETY STARTS WITH ALL OF US" : isPrivacy
                 ? "YOUR PRIVACY, IN PLAIN LANGUAGE"
                 : "THE GROUND RULES FOR GETTING TOGETHER"}
             </div>
@@ -1227,7 +1238,7 @@ function LegalPage({ kind }: { kind: "privacy" | "terms" }) {
                         ))}
                       </ul>
                     ) : (
-                      <p key={p}>{paragraph.replace(/\*\*(.*?)\*\*/g, "$1")}</p>
+                      <p key={p}>{isChildSafety && paragraph.includes("hello@sociol.net") ? <>Sociol’s designated child-safety contact email is <a href="mailto:hello@sociol.net">hello@sociol.net</a>{paragraph.split("hello@sociol.net")[1]}</> : paragraph.replace(/\*\*(.*?)\*\*/g, "$1")}</p>
                     ),
                   )}
                 </div>
@@ -1274,6 +1285,7 @@ function SiteFooter() {
           <a href="/delete-account" className="hover:underline">
             Delete Account
           </a>
+          <a href="/child-safety" className="hover:underline">Child Safety</a>
           <a href="mailto:hello@sociol.net" className="hover:underline">
             Contact
           </a>
